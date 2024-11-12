@@ -24,12 +24,15 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        set_background(Business Event Website.png):
-    bin_str = get_base64(png_file)
-    page_bg_img = '''
-    <style>
-    .stApp {
-    background-image: 
+        background: url("Business Event Website.png")
+    }
+   .sidebar .sidebar-content {
+        background: url("Business Event Website.png")
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+) 
 
 
 
