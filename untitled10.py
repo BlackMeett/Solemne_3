@@ -19,20 +19,25 @@ body {
 """, unsafe_allow_html=True)
 import streamlit as st
 
-# Establecer una imagen de fondo (con un archivo .jpg)
+# Usar una URL de la imagen como fondo
 st.markdown(
     """
     <style>
     .reportview-container {
-        background: url("Business Event Website.png")
-    }
-   .sidebar .sidebar-content {
-        background: url("Business Event Website.png")
+        background: url("https://github.com/BlackMeett/Solemne_3/blob/main/Business%20Event%20Website.png") no-repeat center center fixed;
+        background-size: cover;
     }
     </style>
     """,
     unsafe_allow_html=True
-) 
+)
+
+# El contenido de tu app
+st.title('Mi Evento de Negocios')
+st.write('Bienvenidos a mi página web del evento de negocios.')
+
+
+
 
 
 
