@@ -8,34 +8,27 @@ Original file is located at
 """
 
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-st.markdown("""
-<style>
-body {
-    background-color: #000000;
-}
-</style>
-""", unsafe_allow_html=True)
-import streamlit as st
 
-# Usar una URL de la imagen como fondo
+# Definir la URL de la imagen en tu repositorio GitHub
+image_url = "https://github.com/BlackMeett/Solemne_3/blob/main/Business%20Event%20Website.png"
+
+# Aplicar el fondo a través de CSS con Streamlit
 st.markdown(
-    """
+    f"""
     <style>
-    .reportview-container {
-        background: url("https://github.com/BlackMeett/Solemne_3/blob/main/Business%20Event%20Website.png") no-repeat center center fixed;
+    .reportview-container {{
+        background: url('{image_url}') no-repeat center center fixed;
         background-size: cover;
-    }
+        height: 100%;
+    }}
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# El contenido de tu app
+# Contenido de la aplicación
 st.title('Mi Evento de Negocios')
-st.write('Bienvenidos a mi página web del evento de negocios.')
-
+st.write('Bienvenidos a la página del evento de negocios.')
 
 
 
