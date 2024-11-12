@@ -17,6 +17,27 @@ body {
 }
 </style>
 """, unsafe_allow_html=True)
+import streamlit as st
+
+# Establecer una imagen de fondo (con un archivo .jpg)
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background-image: "Business Event Website.png"; 
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
+# Contenido de la app
+st.title("Mi aplicación con fondo JPG")
+st.write("Este es un ejemplo de cómo poner una imagen .jpg como fondo en Streamlit.")
+
 
 
 
