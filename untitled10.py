@@ -43,11 +43,11 @@ with col1:
         st.write("Has seleccionado la Categoría 1")
 
 with col2:
-    if st.button("Categoría 2"):
+    if st.button("En esta categoría podemos filtrar por categoría de aplicación y sus  funciones."):
         st.write("Has seleccionado la Categoría 2")
 
 with col3:
-    if st.button("Categoría 3"):
+    if st.button("Navegacion libre"):
         st.write("Has seleccionado la Categoría 3")
 
 
