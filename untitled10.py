@@ -35,7 +35,7 @@ st.markdown(
 import streamlit as st
 
 # Título principal
-st.title("Simulación de Páginas Interactivas con Formularios")
+st.title("Simulación de Páginas Interactivas con Botones de Navegación")
 
 # Crear botones de navegación para "páginas" (categorías)
 if st.button("Ir a Categoría 1"):
@@ -64,6 +64,10 @@ if st.session_state.page == "categoría_1":
     
     if submit_button:
         st.write(f"¡Hola {name}, tienes {age} años! Gracias por enviar el formulario.")
+    
+    # Botón para volver atrás
+    if st.button("Volver atrás"):
+        st.session_state.page = "inicio"
 
 elif st.session_state.page == "categoría_2":
     st.header("Categoría 2: Información de la Categoría 2")
@@ -77,6 +81,10 @@ elif st.session_state.page == "categoría_2":
     
     if submit_button:
         st.write(f"Has ingresado el producto: {product} con cantidad: {quantity}. ¡Gracias!")
+    
+    # Botón para volver atrás
+    if st.button("Volver atrás"):
+        st.session_state.page = "inicio"
 
 elif st.session_state.page == "categoría_3":
     st.header("Categoría 3: Información de la Categoría 3")
@@ -89,6 +97,15 @@ elif st.session_state.page == "categoría_3":
     
     if submit_button:
         st.write(f"Gracias por tu comentario: {feedback}")
+    
+    # Botón para volver atrás
+    if st.button("Volver atrás"):
+        st.session_state.page = "inicio"
+
+# Página inicial con botones de navegación
+if st.session_state.page == "inicio":
+    st.header("Página Principal: Elige una Categoría")
+    st.write("Selecciona una categoría para ver más detalles.")
 
 
 
