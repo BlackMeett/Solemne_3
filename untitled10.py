@@ -30,12 +30,25 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-import streamlit as st
+
 
 import streamlit as st
 st.markdown("<h1 style='text-align: center; color: white; font-size: 100px;'>Categorias</h1>", unsafe_allow_html=True)
 
-st.button("Presiona aca"), st.button("De nuevo")
+col1, col2, col3 = st.columns(3)
+
+
+with col1:
+    if st.button("Categoría 1"):
+        st.write("Has seleccionado la Categoría 1")
+
+with col2:
+    if st.button("Categoría 2"):
+        st.write("Has seleccionado la Categoría 2")
+
+with col3:
+    if st.button("Categoría 3"):
+        st.write("Has seleccionado la Categoría 3")
 
 
 
