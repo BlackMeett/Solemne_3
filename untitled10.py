@@ -35,6 +35,8 @@ import streamlit as st
 import streamlit as st
 st.markdown("<h1 style='text-align: center; color: white; font-size: 100px;'>Categorias</h1>", unsafe_allow_html=True)
 
+st.button("Presiona aca"), st.button("De nuevo")
+
 
 
 
