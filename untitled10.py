@@ -34,7 +34,7 @@ import streamlit as st
 
 st.title("")
 
-)
+
 if st.button("Ir a Categoría 1"):
     st.session_state.page = "categoría_1"
 
