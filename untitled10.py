@@ -33,7 +33,7 @@ st.markdown(
 import streamlit as st
 
 import streamlit as st
-st.markdown("<h1 style='text-align: center; color: white; font-size: 200px;'>Categorias</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: white; font-size: 100px;'>Categorias</h1>", unsafe_allow_html=True)
 
 
 
