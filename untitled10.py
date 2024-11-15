@@ -10,14 +10,8 @@ Original file is located at
 import streamlit as st
 import base64
 
-# Función para convertir la imagen en base64
-def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        base64_image = base64.b64encode(img_file.read()).decode()
-    return base64_image
 
-# Ruta de la imagen (reemplaza con el nombre de tu archivo)
-image_path = "portada.png"  # Asegúrate de que la imagen esté en la misma carpeta o proporciona la ruta completa
+image_path = "portada.png" 
 
 # Codificar la imagen en base64
 base64_image = get_base64_image(image_path)
