@@ -41,18 +41,41 @@ st.title("Aplicación de Categorías")
 # Mostrar botones solo si estamos en la página de inicio
 if st.session_state.page == "inicio":
     st.header("Página Principal: Elige una Categoría")
-    st.write("Selecciona una categoría para ver más detalles.")
     
-    # Crear tres columnas: izquierda (vacía), central (con botones), derecha (vacía)
-    col1, col2, col3 = st.columns([1, 2, 1])
+    # Utilizar columnas para alinear los botones horizontalmente
+    col1, col2, col3 = st.columns(3)
     
-    with col2:
+    with col1:
         if st.button("Ir a Categoría 1"):
             st.session_state.page = "categoría_1"
+    
+    with col2:
         if st.button("Ir a Categoría 2"):
             st.session_state.page = "categoría_2"
+    
+    with col3:
         if st.button("Ir a Categoría 3"):
             st.session_state.page = "categoría_3"
+
+# Mostrar contenido según la página seleccionada
+if st.session_state.page == "categoría_1":
+    st.header("Categoría 1: Información de la Categoría 1")
+    
+    if st.button("Volver atrás"):
+        st.session_state.page = "inicio"
+
+elif st.session_state.page == "categoría_2":
+    st.header("Categoría 2: Información de la Categoría 2")
+    
+    if st.button("Volver atrás"):
+        st.session_state.page = "inicio"
+
+elif st.session_state.page == "categoría_3":
+    st.header("Categoría 3: Navegación Libre")
+    
+    if st.button("Volver atrás"):
+        st.session_state.page = "inicio"
+
 
 
 
