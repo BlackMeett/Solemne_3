@@ -30,7 +30,7 @@ st.markdown(
 # Ahora puedes agregar el contenido de tu aplicación aquí
 st.title('Mi aplicación con fondo personalizado')
 st.write('¡Bienvenido a mi aplicación con Streamlit y fondo personalizado!')
-st.image(image_path, use_column_width=True)
+
 
 
 
