@@ -9,10 +9,29 @@ Original file is located at
 
 import streamlit as st
 
-st.image("portada.png", use_column_width=True)
+# Título de la aplicación
+st.title('Aplicación con Fondo de Imagen')
 
+# Ruta de la imagen (asegúrate de que la ruta sea correcta)
+image_path = "portada.png"  # Cambia "tu_imagen.png" por el nombre de tu archivo
 
+# Aplicar la imagen como fondo usando CSS
+st.markdown(
+    f"""
+    <style>
+    body {{
+        background-image: url("data:image/png;base64,{st.image(image_path, use_column_width=True)}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
+# Puedes agregar más contenido de la aplicación aquí
+st.write('¡Bienvenido a mi aplicación con fondo personalizado!')
 
 
 
