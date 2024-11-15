@@ -37,6 +37,42 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+import streamlit as st
+import base64
+
+# Función para convertir la imagen en base64
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        base64_image = base64.b64encode(img_file.read()).decode()
+    return base64_image
+
+# Ruta de la imagen (reemplaza con el nombre de tu archivo)
+image_path = "tu_imagen.png"  # Asegúrate de que la imagen esté en la misma carpeta o proporciona la ruta completa
+
+# Codificar la imagen en base64
+base64_image = get_base64_image(image_path)
+
+# Aplicar la imagen como fondo usando CSS
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/png;base64,{base64_image}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+# Crear tres columnas y usar la columna central para centrar el botón
+col1, col2, col3 = st.columns([1, 2, 1])
+
+with col2:
+    if st.button('Presiona Aquí'):
+        st.write('¡Botón presionado!')
+
 
 
 
