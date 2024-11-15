@@ -9,7 +9,7 @@ Original file is located at
 
 import streamlit as st
 
-st.image(image_path, use_column_width=True)
+st.image("portada.png", use_column_width=True)
 
 
 
