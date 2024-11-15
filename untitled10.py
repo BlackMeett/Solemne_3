@@ -9,14 +9,12 @@ Original file is located at
 import streamlit as st
 import base64
 
-# Ruta de la imagen (reemplaza con el nombre de tu archivo)
-image_path = "fondo_morado.png"  # Asegúrate de que la imagen esté en la misma carpeta o proporciona la ruta completa
+image_path = "fondo_morado.png"  
 
-# Codificar la imagen en base64 directamente
 with open(image_path, "rb") as img_file:
     base64_image = base64.b64encode(img_file.read()).decode()
 
-# Aplicar la imagen como fondo usando CSS
+
 st.markdown(
     f"""
     <style>
@@ -34,10 +32,9 @@ st.markdown(
 
 import streamlit as st
 
-# Título principal
-st.title("Simulación de Páginas Interactivas con Botones de Navegación")
+st.title("")
 
-# Crear botones de navegación para "páginas" (categorías)
+)
 if st.button("Ir a Categoría 1"):
     st.session_state.page = "categoría_1"
 
@@ -47,16 +44,15 @@ elif st.button("Ir a Categoría 2"):
 elif st.button("Ir a Categoría 3"):
     st.session_state.page = "categoría_3"
 
-# Verificar la página seleccionada, si no se ha seleccionado ninguna, ir a la por defecto
 if "page" not in st.session_state:
-    st.session_state.page = "categoría_1"
+    st.session_state.page = "inicio"
 
-# Contenido de las "páginas" según la categoría seleccionada
+
 if st.session_state.page == "categoría_1":
     st.header("Categoría 1: Información de la Categoría 1")
     st.write("Aquí va la información relacionada con la Categoría 1.")
     
-    # Formulario para la Categoría 1
+    
     with st.form(key="form_cat1"):
         name = st.text_input("Ingresa tu nombre:")
         age = st.number_input("Ingresa tu edad:", min_value=1, max_value=100)
@@ -65,7 +61,7 @@ if st.session_state.page == "categoría_1":
     if submit_button:
         st.write(f"¡Hola {name}, tienes {age} años! Gracias por enviar el formulario.")
     
-    # Botón para volver atrás
+    
     if st.button("Volver atrás"):
         st.session_state.page = "inicio"
 
@@ -73,7 +69,7 @@ elif st.session_state.page == "categoría_2":
     st.header("Categoría 2: Información de la Categoría 2")
     st.write("Aquí va la información relacionada con la Categoría 2.")
     
-    # Formulario para la Categoría 2
+    
     with st.form(key="form_cat2"):
         product = st.text_input("Ingresa el nombre del producto:")
         quantity = st.number_input("Ingresa la cantidad:", min_value=1)
@@ -82,7 +78,7 @@ elif st.session_state.page == "categoría_2":
     if submit_button:
         st.write(f"Has ingresado el producto: {product} con cantidad: {quantity}. ¡Gracias!")
     
-    # Botón para volver atrás
+    
     if st.button("Volver atrás"):
         st.session_state.page = "inicio"
 
@@ -90,7 +86,7 @@ elif st.session_state.page == "categoría_3":
     st.header("Categoría 3: Información de la Categoría 3")
     st.write("Aquí va la información relacionada con la Categoría 3.")
     
-    # Formulario para la Categoría 3
+    
     with st.form(key="form_cat3"):
         feedback = st.text_area("Deja tus comentarios:")
         submit_button = st.form_submit_button("Enviar")
@@ -98,11 +94,11 @@ elif st.session_state.page == "categoría_3":
     if submit_button:
         st.write(f"Gracias por tu comentario: {feedback}")
     
-    # Botón para volver atrás
+    
     if st.button("Volver atrás"):
         st.session_state.page = "inicio"
 
-# Página inicial con botones de navegación
+
 if st.session_state.page == "inicio":
     st.header("Página Principal: Elige una Categoría")
     st.write("Selecciona una categoría para ver más detalles.")
