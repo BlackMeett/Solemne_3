@@ -30,11 +30,19 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+import streamlit as st
+
+# Crear un espacio vacío antes del botón
+for _ in range(10):
+    st.empty()  # Añade 10 líneas de espacio vacío (ajusta la cantidad según lo que necesites)
+
+# Crear tres columnas y usar la columna central para centrar el botón
 col1, col2, col3 = st.columns([1, 2, 1])
 
 with col2:
     if st.button('Presiona Aquí'):
         st.write('¡Botón presionado!')
+
 
 
 
