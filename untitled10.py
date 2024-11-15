@@ -50,7 +50,7 @@ if st.session_state.page == "inicio":
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        if st.button("Ir a Categoría 1"):
+        if st.button("Mejor Valorada"):
             cambiar_pagina("categoría_1")
     
     with col2:
@@ -63,7 +63,7 @@ if st.session_state.page == "inicio":
 
 # Mostrar contenido según la página seleccionada
 elif st.session_state.page == "categoría_1":
-    st.header("Categoría 1: Información de la Categoría 1")
+    st.header("Aca se mostraran las aplicaciones mejores valoradas ")
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
