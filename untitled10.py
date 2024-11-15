@@ -37,9 +37,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Contenido de la aplicación
-st.title('Aplicación con Fondo de Imagen')
-st.write('¡Bienvenido a mi aplicación con fondo personalizado!')
 
 
 
