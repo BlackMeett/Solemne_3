@@ -30,7 +30,11 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.title("Categorias")
+import streamlit as st
+
+import streamlit as st
+st.markdown("<h1 style='text-align: center; color: red;'>Some title</h1>", unsafe_allow_html=True)
+
 
 
 
