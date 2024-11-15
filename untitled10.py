@@ -31,15 +31,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-for _ in range(200):
-    st.empty()  
-
-# Crear tres columnas y usar la columna central para centrar el botón
-col1, col2, col3 = st.columns([1, 2, 1])
-
-with col2:
-    if st.button('Presiona Aquí'):
-        st.write('¡Botón presionado!')
 
 
 
