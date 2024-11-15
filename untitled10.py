@@ -9,28 +9,7 @@ Original file is located at
 
 import streamlit as st
 
-# Ruta a la imagen
-image_path = "/home/codespace/Solemne_3/portada.png"  # Cambia esta ruta si es necesario
-
-# Establecer el fondo usando CSS
-st.markdown(
-    f"""
-    <style>
-        body {{
-            background-image: url("{image_path}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# Ahora puedes agregar el contenido de tu aplicación aquí
-st.title('Mi aplicación con fondo personalizado')
-st.write('¡Bienvenido a mi aplicación con Streamlit y fondo personalizado!')
-
+st.image(image_path, use_column_width=True)
 
 
 
