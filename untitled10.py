@@ -31,7 +31,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-for _ in range(40):
+for _ in range(200):
     st.empty()  
 
 # Crear tres columnas y usar la columna central para centrar el botón
