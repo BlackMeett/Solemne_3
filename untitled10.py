@@ -10,7 +10,7 @@ import streamlit as st
 import base64
 
 # Ruta de la imagen (reemplaza con el nombre de tu archivo)
-image_path = "portada.png"  # Asegúrate de que la imagen esté en la misma carpeta o proporciona la ruta completa
+image_path = "fondo_morado.png"  # Asegúrate de que la imagen esté en la misma carpeta o proporciona la ruta completa
 
 # Codificar la imagen en base64 directamente
 with open(image_path, "rb") as img_file:
