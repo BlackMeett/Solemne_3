@@ -32,26 +32,31 @@ st.markdown(
 
 import streamlit as st
 
-st.title("")
-
-
-if st.button("Ir a Categoría 1"):
-    st.session_state.page = "categoría_1"
-
-elif st.button("Ir a Categoría 2"):
-    st.session_state.page = "categoría_2"
-
-elif st.button("Ir a Categoría 3"):
-    st.session_state.page = "categoría_3"
-
+# Configuración inicial para la página
 if "page" not in st.session_state:
     st.session_state.page = "inicio"
 
+# Título de la aplicación
+st.title("Aplicación de Categorías")
 
+# Mostrar botones solo si estamos en la página de inicio
+if st.session_state.page == "inicio":
+    st.header("Página Principal: Elige una Categoría")
+    st.write("Selecciona una categoría para ver más detalles.")
+    
+    if st.button("Ir a Categoría 1"):
+        st.session_state.page = "categoría_1"
+    
+    elif st.button("Ir a Categoría 2"):
+        st.session_state.page = "categoría_2"
+    
+    elif st.button("Ir a Categoría 3"):
+        st.session_state.page = "categoría_3"
+
+# Mostrar contenido según la página seleccionada
 if st.session_state.page == "categoría_1":
     st.header("Categoría 1: Información de la Categoría 1")
     st.write("Aquí va la información relacionada con la Categoría 1.")
-    
     
     with st.form(key="form_cat1"):
         name = st.text_input("Ingresa tu nombre:")
@@ -61,14 +66,12 @@ if st.session_state.page == "categoría_1":
     if submit_button:
         st.write(f"¡Hola {name}, tienes {age} años! Gracias por enviar el formulario.")
     
-    
     if st.button("Volver atrás"):
         st.session_state.page = "inicio"
 
 elif st.session_state.page == "categoría_2":
     st.header("Categoría 2: Información de la Categoría 2")
     st.write("Aquí va la información relacionada con la Categoría 2.")
-    
     
     with st.form(key="form_cat2"):
         product = st.text_input("Ingresa el nombre del producto:")
@@ -78,14 +81,12 @@ elif st.session_state.page == "categoría_2":
     if submit_button:
         st.write(f"Has ingresado el producto: {product} con cantidad: {quantity}. ¡Gracias!")
     
-    
     if st.button("Volver atrás"):
         st.session_state.page = "inicio"
 
 elif st.session_state.page == "categoría_3":
     st.header("Categoría 3: Información de la Categoría 3")
     st.write("Aquí va la información relacionada con la Categoría 3.")
-    
     
     with st.form(key="form_cat3"):
         feedback = st.text_area("Deja tus comentarios:")
@@ -94,14 +95,8 @@ elif st.session_state.page == "categoría_3":
     if submit_button:
         st.write(f"Gracias por tu comentario: {feedback}")
     
-    
     if st.button("Volver atrás"):
         st.session_state.page = "inicio"
-
-
-if st.session_state.page == "inicio":
-    st.header("Página Principal: Elige una Categoría")
-    st.write("Selecciona una categoría para ver más detalles.")
 
 
 
