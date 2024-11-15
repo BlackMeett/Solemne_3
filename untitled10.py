@@ -35,6 +35,10 @@ import streamlit as st
 if "page" not in st.session_state:
     st.session_state.page = "inicio"
 
+# Función para cambiar de página
+def cambiar_pagina(pagina):
+    st.session_state.page = pagina
+
 # Título de la aplicación
 st.title("Aplicación de Categorías")
 
@@ -47,34 +51,35 @@ if st.session_state.page == "inicio":
     
     with col1:
         if st.button("Ir a Categoría 1"):
-            st.session_state.page = "categoría_1"
+            cambiar_pagina("categoría_1")
     
     with col2:
         if st.button("Ir a Categoría 2"):
-            st.session_state.page = "categoría_2"
+            cambiar_pagina("categoría_2")
     
     with col3:
         if st.button("Ir a Categoría 3"):
-            st.session_state.page = "categoría_3"
+            cambiar_pagina("categoría_3")
 
 # Mostrar contenido según la página seleccionada
 if st.session_state.page == "categoría_1":
     st.header("Categoría 1: Información de la Categoría 1")
     
     if st.button("Volver atrás"):
-        st.session_state.page = "inicio"
+        cambiar_pagina("inicio")
 
 elif st.session_state.page == "categoría_2":
     st.header("Categoría 2: Información de la Categoría 2")
     
     if st.button("Volver atrás"):
-        st.session_state.page = "inicio"
+        cambiar_pagina("inicio")
 
 elif st.session_state.page == "categoría_3":
     st.header("Categoría 3: Navegación Libre")
     
     if st.button("Volver atrás"):
-        st.session_state.page = "inicio"
+        cambiar_pagina("inicio")
+
 
 
 
