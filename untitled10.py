@@ -86,15 +86,7 @@ elif st.session_state.page == "categoría_2":
 
 elif st.session_state.page == "categoría_3":
     st.header("Categoría 3: Información de la Categoría 3")
-    st.write("Aquí va la información relacionada con la Categoría 3.")
-    
-    with st.form(key="form_cat3"):
-        feedback = st.text_area("Deja tus comentarios:")
-        submit_button = st.form_submit_button("Enviar")
-    
-    if submit_button:
-        st.write(f"Gracias por tu comentario: {feedback}")
-    
+    st.write("Navegacion Libre")  
     if st.button("Volver atrás"):
         st.session_state.page = "inicio"
 
