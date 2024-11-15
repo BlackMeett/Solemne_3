@@ -29,7 +29,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
 import streamlit as st
 
 # Configuración inicial para la página
@@ -44,52 +43,16 @@ if st.session_state.page == "inicio":
     st.header("Página Principal: Elige una Categoría")
     st.write("Selecciona una categoría para ver más detalles.")
     
-    if st.button("Ir a Categoría 1"):
-        st.session_state.page = "categoría_1"
+    # Crear tres columnas: izquierda (vacía), central (con botones), derecha (vacía)
+    col1, col2, col3 = st.columns([1, 2, 1])
     
-    elif st.button("Ir a Categoría 2"):
-        st.session_state.page = "categoría_2"
-    
-    elif st.button("Ir a Categoría 3"):
-        st.session_state.page = "categoría_3"
-
-# Mostrar contenido según la página seleccionada
-if st.session_state.page == "categoría_1":
-    st.header("Categoría 1: Información de la Categoría 1")
-    st.write("Aquí va la información relacionada con la Categoría 1.")
-    
-    with st.form(key="form_cat1"):
-        name = st.text_input("Ingresa tu nombre:")
-        age = st.number_input("Ingresa tu edad:", min_value=1, max_value=100)
-        submit_button = st.form_submit_button("Enviar")
-    
-    if submit_button:
-        st.write(f"¡Hola {name}, tienes {age} años! Gracias por enviar el formulario.")
-    
-    if st.button("Volver atrás"):
-        st.session_state.page = "inicio"
-
-elif st.session_state.page == "categoría_2":
-    st.header("Categoría 2: Información de la Categoría 2")
-    st.write("Aquí va la información relacionada con la Categoría 2.")
-    
-    with st.form(key="form_cat2"):
-        product = st.text_input("Ingresa el nombre del producto:")
-        quantity = st.number_input("Ingresa la cantidad:", min_value=1)
-        submit_button = st.form_submit_button("Enviar")
-    
-    if submit_button:
-        st.write(f"Has ingresado el producto: {product} con cantidad: {quantity}. ¡Gracias!")
-    
-    if st.button("Volver atrás"):
-        st.session_state.page = "inicio"
-
-elif st.session_state.page == "categoría_3":
-    st.header("Categoría 3: Información de la Categoría 3")
-    st.write("Navegacion Libre")  
-    if st.button("Volver atrás"):
-        st.session_state.page = "inicio"
-
+    with col2:
+        if st.button("Ir a Categoría 1"):
+            st.session_state.page = "categoría_1"
+        if st.button("Ir a Categoría 2"):
+            st.session_state.page = "categoría_2"
+        if st.button("Ir a Categoría 3"):
+            st.session_state.page = "categoría_3"
 
 
 
