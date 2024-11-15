@@ -33,22 +33,63 @@ st.markdown(
 
 
 import streamlit as st
-st.markdown("<h1 style='text-align: center; color: white; font-size: 100px;'>Categorias</h1>", unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns(3)
+# Título principal
+st.title("Simulación de Páginas Interactivas con Formularios")
 
+# Crear botones de navegación para "páginas" (categorías)
+if st.button("Ir a Categoría 1"):
+    st.session_state.page = "categoría_1"
 
-with col1:
-    if st.button("En esta categoría podemos filtrar por calificación de los usuarios."):
-        st.write("Has seleccionado la Categoría 1")
+elif st.button("Ir a Categoría 2"):
+    st.session_state.page = "categoría_2"
 
-with col2:
-    if st.button("En esta categoría podemos filtrar por categoría de aplicación y sus  funciones."):
-        st.write("Has seleccionado la Categoría 2")
+elif st.button("Ir a Categoría 3"):
+    st.session_state.page = "categoría_3"
 
-with col3:
-    if st.button("Navegacion libre"):
-        st.write("Has seleccionado la Categoría 3")
+# Verificar la página seleccionada, si no se ha seleccionado ninguna, ir a la por defecto
+if "page" not in st.session_state:
+    st.session_state.page = "categoría_1"
+
+# Contenido de las "páginas" según la categoría seleccionada
+if st.session_state.page == "categoría_1":
+    st.header("Categoría 1: Información de la Categoría 1")
+    st.write("Aquí va la información relacionada con la Categoría 1.")
+    
+    # Formulario para la Categoría 1
+    with st.form(key="form_cat1"):
+        name = st.text_input("Ingresa tu nombre:")
+        age = st.number_input("Ingresa tu edad:", min_value=1, max_value=100)
+        submit_button = st.form_submit_button("Enviar")
+    
+    if submit_button:
+        st.write(f"¡Hola {name}, tienes {age} años! Gracias por enviar el formulario.")
+
+elif st.session_state.page == "categoría_2":
+    st.header("Categoría 2: Información de la Categoría 2")
+    st.write("Aquí va la información relacionada con la Categoría 2.")
+    
+    # Formulario para la Categoría 2
+    with st.form(key="form_cat2"):
+        product = st.text_input("Ingresa el nombre del producto:")
+        quantity = st.number_input("Ingresa la cantidad:", min_value=1)
+        submit_button = st.form_submit_button("Enviar")
+    
+    if submit_button:
+        st.write(f"Has ingresado el producto: {product} con cantidad: {quantity}. ¡Gracias!")
+
+elif st.session_state.page == "categoría_3":
+    st.header("Categoría 3: Información de la Categoría 3")
+    st.write("Aquí va la información relacionada con la Categoría 3.")
+    
+    # Formulario para la Categoría 3
+    with st.form(key="form_cat3"):
+        feedback = st.text_area("Deja tus comentarios:")
+        submit_button = st.form_submit_button("Enviar")
+    
+    if submit_button:
+        st.write(f"Gracias por tu comentario: {feedback}")
+
 
 
 
