@@ -43,7 +43,7 @@ with col1:
         st.write("Has seleccionado la Categoría 1")
 
 with col2:
-    if st.button("Categoría 2" color:red):
+    if st.button("Categoría 2"):
         st.write("Has seleccionado la Categoría 2")
 
 with col3:
