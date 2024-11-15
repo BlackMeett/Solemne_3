@@ -39,7 +39,7 @@ col1, col2, col3 = st.columns(3)
 
 
 with col1:
-    if st.button("Categoría 1"):
+    if st.button("En esta categoría podemos filtrar por calificación de los usuarios."):
         st.write("Has seleccionado la Categoría 1")
 
 with col2:
