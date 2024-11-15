@@ -8,19 +8,26 @@ Original file is located at
 """
 
 import streamlit as st
+import base64
 
-# Título de la aplicación
-st.title('Aplicación con Fondo de Imagen')
+# Función para convertir la imagen en base64
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        base64_image = base64.b64encode(img_file.read()).decode()
+    return base64_image
 
-# Ruta de la imagen (asegúrate de que la ruta sea correcta)
-image_path = "portada.png"  # Cambia "tu_imagen.png" por el nombre de tu archivo
+# Ruta de la imagen (reemplaza con el nombre de tu archivo)
+image_path = "portada.png"  # Asegúrate de que la imagen esté en la misma carpeta o proporciona la ruta completa
+
+# Codificar la imagen en base64
+base64_image = get_base64_image(image_path)
 
 # Aplicar la imagen como fondo usando CSS
 st.markdown(
     f"""
     <style>
-    body {{
-        background-image: url("data:image/png;base64,{st.image(image_path, use_column_width=True)}");
+    .stApp {{
+        background-image: url("data:image/png;base64,{base64_image}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -30,16 +37,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Puedes agregar más contenido de la aplicación aquí
+# Contenido de la aplicación
+st.title('Aplicación con Fondo de Imagen')
 st.write('¡Bienvenido a mi aplicación con fondo personalizado!')
-
-
-
-
-
-
-
-
 
 
 
