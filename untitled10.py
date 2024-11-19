@@ -44,7 +44,7 @@ def cambiar_pagina(nueva_pagina):
 
 # Mostrar botones solo si estamos en la página de inicio
 if st.session_state.page == "inicio":
-    st.header("Página Principal: Elige una Categoría")
+    st.header("Seleccione Una Categoria")
     
     # Utilizar columnas para alinear los botones horizontalmente
     col1, col2, col3 = st.columns(3)
