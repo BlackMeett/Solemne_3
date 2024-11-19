@@ -54,11 +54,11 @@ if st.session_state.page == "inicio":
             cambiar_pagina("categoría_1")
     
     with col2:
-        if st.button("Ir a Categoría 2"):
+        if st.button("Tipo"):
             cambiar_pagina("categoría_2")
     
     with col3:
-        if st.button("Ir a Categoría 3"):
+        if st.button("Navegacion Libre"):
             cambiar_pagina("categoría_3")
 
 # Mostrar contenido según la página seleccionada
