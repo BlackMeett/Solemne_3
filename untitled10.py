@@ -92,7 +92,31 @@ elif st.session_state.page == "categoría_2":
     # Manejo de subpáginas específicas
     else:
         if st.session_state.subpage == "videojuego":
-            st.header("Video
+            st.header("Videojuego/Entretenimiento")
+            st.write("Aquí se mostrarán las aplicaciones de Videojuego/Entretenimiento.")
+        elif st.session_state.subpage == "social":
+            st.header("Social")
+            st.write("Aquí se mostrarán las aplicaciones de la categoría Social.")
+        elif st.session_state.subpage == "productividad":
+            st.header("Productividad")
+            st.write("Aquí se mostrarán las aplicaciones de Productividad.")
+        elif st.session_state.subpage == "educación":
+            st.header("Educación")
+            st.write("Aquí se mostrarán las aplicaciones de Educación.")
+        elif st.session_state.subpage == "cuidados":
+            st.header("Cuidados")
+            st.write("Aquí se mostrarán las aplicaciones de Cuidados.")
+        
+        # Botón para volver a la lista de tipos sin salir de "categoría_2"
+        if st.button("Volver a Tipos"):
+            st.session_state.subpage = None
+
+elif st.session_state.page == "categoría_3":
+    st.header("Navegación Libre")
+    st.write("Aquí se puede explorar la navegación libre.")
+    
+    if st.button("Volver atrás"):
+        cambiar_pagina("inicio")
 
 
 
