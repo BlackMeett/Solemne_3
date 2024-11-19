@@ -23,17 +23,22 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Configuración inicial para la página y el historial
+# Configuración inicial para la página y subpágina actual
 if "page" not in st.session_state:
     st.session_state.page = "inicio"
 
-if "previous_page" not in st.session_state:
-    st.session_state.previous_page = None
+if "subpage" not in st.session_state:
+    st.session_state.subpage = None
 
-# Función para cambiar la página
+# Función para cambiar la página principal
 def cambiar_pagina(nueva_pagina):
-    st.session_state.previous_page = st.session_state.page
     st.session_state.page = nueva_pagina
+    if nueva_pagina != "categoría_2":
+        st.session_state.subpage = None  # Resetear la subpágina solo si no estamos en "categoría_2"
+
+# Función para cambiar la subpágina dentro de "Tipos"
+def cambiar_subpagina(nueva_subpagina):
+    st.session_state.subpage = nueva_subpagina
 
 # Título de la aplicación
 st.title("Aplicación de Categorías")
@@ -65,75 +70,30 @@ elif st.session_state.page == "categoría_1":
         cambiar_pagina("inicio")
 
 elif st.session_state.page == "categoría_2":
-    st.header("Seleccione el tipo de aplicación")
-
-    # Crear botones para cada tipo de aplicación con navegación a subpáginas
-    tipo_col1, tipo_col2, tipo_col3, tipo_col4, tipo_col5 = st.columns(5)
-    
-    with tipo_col1:
+    # Manejar las subpáginas de la categoría "Tipos"
+    if st.session_state.subpage is None:
+        st.header("Seleccione el tipo de aplicación")
+        
+        # Mostrar botones para las subcategorías
         if st.button("Videojuego/Entretenimiento"):
-            cambiar_pagina("videojuego")
-    
-    with tipo_col2:
+            cambiar_subpagina("videojuego")
         if st.button("Social"):
-            cambiar_pagina("social")
-    
-    with tipo_col3:
+            cambiar_subpagina("social")
         if st.button("Productividad"):
-            cambiar_pagina("productividad")
-    
-    with tipo_col4:
+            cambiar_subpagina("productividad")
         if st.button("Educación"):
-            cambiar_pagina("educación")
-    
-    with tipo_col5:
+            cambiar_subpagina("educación")
         if st.button("Cuidados"):
-            cambiar_pagina("cuidados")
+            cambiar_subpagina("cuidados")
+        
+        if st.button("Volver atrás"):
+            cambiar_pagina("inicio")
     
-    if st.button("Volver atrás"):
-        cambiar_pagina("inicio")
+    # Manejo de subpáginas específicas
+    else:
+        if st.session_state.subpage == "videojuego":
+            st.header("Video
 
-# Subpáginas para cada tipo de aplicación
-elif st.session_state.page == "videojuego":
-    st.header("Videojuego/Entretenimiento")
-    st.write("Aquí se mostrarán las aplicaciones de Videojuego/Entretenimiento.")
-    
-    if st.button("Volver atrás"):
-        cambiar_pagina("categoría_2")
-
-elif st.session_state.page == "social":
-    st.header("Social")
-    st.write("Aquí se mostrarán las aplicaciones de la categoría Social.")
-    
-    if st.button("Volver atrás"):
-        cambiar_pagina("categoría_2")
-
-elif st.session_state.page == "productividad":
-    st.header("Productividad")
-    st.write("Aquí se mostrarán las aplicaciones de Productividad.")
-    
-    if st.button("Volver atrás"):
-        cambiar_pagina("categoría_2")
-
-elif st.session_state.page == "educación":
-    st.header("Educación")
-    st.write("Aquí se mostrarán las aplicaciones de Educación.")
-    
-    if st.button("Volver atrás"):
-        cambiar_pagina("categoría_2")
-
-elif st.session_state.page == "cuidados":
-    st.header("Cuidados")
-    st.write("Aquí se mostrarán las aplicaciones de Cuidados.")
-    
-    if st.button("Volver atrás"):
-        cambiar_pagina("categoría_2")
-
-elif st.session_state.page == "categoría_3":
-    st.header("Categoría 3: Navegación Libre")
-    
-    if st.button("Volver atrás"):
-        cambiar_pagina("inicio")
 
 
 
