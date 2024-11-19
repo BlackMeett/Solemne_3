@@ -23,12 +23,16 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Configuración inicial para la página
+# Configuración inicial para la página y el historial
 if "page" not in st.session_state:
     st.session_state.page = "inicio"
 
+if "previous_page" not in st.session_state:
+    st.session_state.previous_page = None
+
 # Función para cambiar la página
 def cambiar_pagina(nueva_pagina):
+    st.session_state.previous_page = st.session_state.page
     st.session_state.page = nueva_pagina
 
 # Título de la aplicación
@@ -130,6 +134,7 @@ elif st.session_state.page == "categoría_3":
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
+
 
 
 
