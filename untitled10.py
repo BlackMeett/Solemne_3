@@ -68,6 +68,7 @@ if st.session_state.page == "inicio":
 elif st.session_state.page == "categoría_1":
     st.header("Contenido de Opción 1")
     st.write("Aquí se mostrarán los datos relacionados con la Opción 1.")
+    pf
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
