@@ -1,8 +1,10 @@
 import streamlit as st
 import base64
+import pandas as pd
 
-# Cargar la imagen de fondo
-image_path = "fondo_morado.png"  # Asegúrate de tener la imagen en el directorio correcto
+
+pf = pd.read_csv("spotify_songs_dataset.csv")
+image_path = "fondo_morado.png"  
 
 # Codificar la imagen en base64
 with open(image_path, "rb") as img_file:
