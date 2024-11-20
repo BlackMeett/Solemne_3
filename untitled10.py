@@ -41,82 +41,84 @@ def cambiar_subpagina(nueva_subpagina):
     st.session_state.subpage = nueva_subpagina
 
 # Título de la aplicación
-st.title("Aplicación de Categorías")
+st.title("Aplicación Genérica")
 
 # Mostrar botones solo si estamos en la página de inicio
 if st.session_state.page == "inicio":
-    st.header("Seleccione una categoría")
+    st.header("Seleccione una opción")
     
     # Utilizar columnas para alinear los botones horizontalmente
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        if st.button("Mejor Valorada\nEn esta categoría podemos filtrar por calificación de los usuarios."):
+        if st.button("Opción 1"):
             cambiar_pagina("categoría_1")
     
     with col2:
-        if st.button("Tipo\nEn esta categoría podemos filtrar por categoría de aplicación y sus funciones."):
+        if st.button("Opción 2"):
             cambiar_pagina("categoría_2")
     
     with col3:
-        if st.button("Navegación Libre"):
+        if st.button("Opción 3"):
             cambiar_pagina("categoría_3")
 
 # Mostrar contenido según la página seleccionada
 elif st.session_state.page == "categoría_1":
-    st.header("Aquí se mostrarán las aplicaciones mejores valoradas.")
+    st.header("Contenido de Opción 1")
+    st.write("Aquí se mostrarán los datos relacionados con la Opción 1.")
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
 
 elif st.session_state.page == "categoría_2":
-    # Manejar las subpáginas de la categoría "Tipos"
+    # Manejar las subpáginas de la categoría "Opción 2"
     if st.session_state.subpage is None:
-        st.header("Seleccione el tipo de aplicación")
+        st.header("Seleccione una subcategoría")
         
         # Mostrar botones para las subcategorías
-        if st.button("Videojuego/Entretenimiento"):
-            cambiar_subpagina("videojuego")
-        if st.button("Social"):
-            cambiar_subpagina("social")
-        if st.button("Productividad"):
-            cambiar_subpagina("productividad")
-        if st.button("Educación"):
-            cambiar_subpagina("educación")
-        if st.button("Cuidados"):
-            cambiar_subpagina("cuidados")
+        if st.button("Subcategoría A"):
+            cambiar_subpagina("subcategoria_a")
+        if st.button("Subcategoría B"):
+            cambiar_subpagina("subcategoria_b")
+        if st.button("Subcategoría C"):
+            cambiar_subpagina("subcategoria_c")
+        if st.button("Subcategoría D"):
+            cambiar_subpagina("subcategoria_d")
+        if st.button("Subcategoría E"):
+            cambiar_subpagina("subcategoria_e")
         
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
     
     # Manejo de subpáginas específicas
     else:
-        if st.session_state.subpage == "videojuego":
-            st.header("Videojuego/Entretenimiento")
-            st.write("Aquí se mostrarán las aplicaciones de Videojuego/Entretenimiento.")
-        elif st.session_state.subpage == "social":
-            st.header("Social")
-            st.write("Aquí se mostrarán las aplicaciones de la categoría Social.")
-        elif st.session_state.subpage == "productividad":
-            st.header("Productividad")
-            st.write("Aquí se mostrarán las aplicaciones de Productividad.")
-        elif st.session_state.subpage == "educación":
-            st.header("Educación")
-            st.write("Aquí se mostrarán las aplicaciones de Educación.")
-        elif st.session_state.subpage == "cuidados":
-            st.header("Cuidados")
-            st.write("Aquí se mostrarán las aplicaciones de Cuidados.")
+        if st.session_state.subpage == "subcategoria_a":
+            st.header("Subcategoría A")
+            st.write("Aquí se mostrarán los datos de la Subcategoría A.")
+        elif st.session_state.subpage == "subcategoria_b":
+            st.header("Subcategoría B")
+            st.write("Aquí se mostrarán los datos de la Subcategoría B.")
+        elif st.session_state.subpage == "subcategoria_c":
+            st.header("Subcategoría C")
+            st.write("Aquí se mostrarán los datos de la Subcategoría C.")
+        elif st.session_state.subpage == "subcategoria_d":
+            st.header("Subcategoría D")
+            st.write("Aquí se mostrarán los datos de la Subcategoría D.")
+        elif st.session_state.subpage == "subcategoria_e":
+            st.header("Subcategoría E")
+            st.write("Aquí se mostrarán los datos de la Subcategoría E.")
         
-        # Botón para volver a la lista de tipos sin salir de "categoría_2"
-        if st.button("Volver a Tipos"):
+        # Botón para volver a la lista de subcategorías sin salir de "categoría_2"
+        if st.button("Volver a subcategorías"):
             st.session_state.subpage = None
 
 elif st.session_state.page == "categoría_3":
-    st.header("Navegación Libre")
-    st.write("Aquí se puede explorar la navegación libre.")
+    st.header("Contenido de Opción 3")
+    st.write("Aquí se puede explorar la Opción 3 de forma libre.")
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
+
 
 
 
