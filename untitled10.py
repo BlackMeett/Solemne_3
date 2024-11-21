@@ -83,7 +83,7 @@ elif st.session_state.page == "categoría_2":
         if st.button("Grafico De contenido Explicito"):
             cambiar_subpagina("subcategoria_a")
 
-        if st.button("Subcategoría B"):
+        if st.button("Distribucion de idioma de canciones"):
             cambiar_subpagina("subcategoria_b")  
         if st.button("Subcategoría C"):
             cambiar_subpagina("subcategoria_c")
