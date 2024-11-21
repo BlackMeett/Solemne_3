@@ -101,7 +101,7 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría A")
             st.write("Aquí se mostrarán los datos de la Subcategoría A.")
             contenido_explicito = pf["explicit_content"].value_counts()
-            contenido_explicito.plot(kind='bar', color=['lightblue', 'orange'], ax=ax)
+            contenido_explicito.plot(kind='bar', color=['lightblue', 'orange'])
             ax.set_xticklabels(['No Explícito', 'Explícito'], rotation=0)
             st.pyplot(fig)
         elif st.session_state.subpage == "subcategoria_b":
