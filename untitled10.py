@@ -198,8 +198,7 @@ elif st.session_state.page == "categoría_2":
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.")
-        
-        # Botón para volver a la página anterior
+
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
 
