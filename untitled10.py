@@ -1,6 +1,7 @@
 import streamlit as st
 import base64
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 pf = pd.read_csv("spotify_songs_dataset.csv")
@@ -79,8 +80,9 @@ elif st.session_state.page == "categoría_2":
         st.header("Seleccione una subcategoría")
         
         # Mostrar botones para las subcategorías
-        if st.button("Subcategoría A"):
+        if st.button("Grafico De contenido Explicito"):
             cambiar_subpagina("subcategoria_a")
+
         if st.button("Subcategoría B"):
             cambiar_subpagina("subcategoria_b")
         if st.button("Subcategoría C"):
