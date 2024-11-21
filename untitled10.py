@@ -101,8 +101,9 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría A")
             st.write("Aquí se mostrarán los datos de la Subcategoría A.")
             contenido_explicito = pf["explicit_content"].value_counts()
-            contenido_explicito.plot(kind='bar', color=['lightblue', 'orange'], ax=ax)
             fig, ax = plt.subplots(figsize=(8, 6))
+            contenido_explicito.plot(kind='bar', color=['lightblue', 'orange'], ax=ax)
+            
             ax.set_xticklabels(['No Explícito', 'Explícito'], rotation=0, ax=ax)
             ax.set_title('Cantidad de Canciones con Contenido Explícito')
             ax.set_xlabel('Contenido Explícito')
