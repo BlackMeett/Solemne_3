@@ -109,7 +109,7 @@ elif st.session_state.page == "categoría_2":
             plt.legend(title='Contenido Explícito', labels=['No', 'Sí'])
             plt.xticks(rotation=45, ha='right')
             plt.tight_layout()
-            st.show()
+            plt.show()
             
         elif st.session_state.subpage == "subcategoria_b":
             st.header("Subcategoría B")
