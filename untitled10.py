@@ -84,13 +84,7 @@ elif st.session_state.page == "categoría_2":
             cambiar_subpagina("subcategoria_a")
 
         if st.button("Subcategoría B"):
-            cambiar_subpagina("subcategoria_b")
-            contador_lenguaje = pf["language"].value_counts()
-            fig, ax = plt.subplots(figsize=(10, 8))
-            ax.pie(contador_lenguaje, labels=contador_lenguaje.index, autopct='%1.1f%%', startangle=140, colors=plt.cm.tab20.colors)
-            ax.set_title('Distribución de Canciones por Idioma')
-            st.pyplot(fig)
-            
+            cambiar_subpagina("subcategoria_b")  
         if st.button("Subcategoría C"):
             cambiar_subpagina("subcategoria_c")
         if st.button("Subcategoría D"):
@@ -109,6 +103,11 @@ elif st.session_state.page == "categoría_2":
         elif st.session_state.subpage == "subcategoria_b":
             st.header("Subcategoría B")
             st.write("Aquí se mostrarán los datos de la Subcategoría B.")
+            contador_lenguaje = pf["language"].value_counts()
+            fig, ax = plt.subplots(figsize=(10, 8))
+            ax.pie(contador_lenguaje, labels=contador_lenguaje.index, autopct='%1.1f%%', startangle=140, colors=plt.cm.tab20.colors)
+            ax.set_title('Distribución de Canciones por Idioma')
+            st.pyplot(fig)
         elif st.session_state.subpage == "subcategoria_c":
             st.header("Subcategoría C")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
