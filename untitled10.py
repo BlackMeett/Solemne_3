@@ -161,10 +161,10 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría D: Duración Promedio de Canciones por Género")
             
             # Filtrar el dataset para asegurarnos de que no haya valores nulos en las columnas necesarias
-            pf_filtrado_duracion = pf.dropna(subset=['genre', 'duration_ms'])
+            pf_filtrado_duracion = pf.dropna(subset=['genre', 'duration'])
             
             # Calcular la duración promedio en minutos por género
-            duracion_promedio = pf_filtrado_duracion.groupby('genre')['duration_ms'].mean() / 60000  # Convertir de ms a minutos
+            duracion_promedio = pf_filtrado_duracion.groupby('genre')['duration'].mean() / 60000  # Convertir de ms a minutos
             
             # Crear la gráfica de barras
             fig, ax = plt.subplots(figsize=(12, 8))
