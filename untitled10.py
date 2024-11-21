@@ -86,7 +86,7 @@ elif st.session_state.page == "categoría_2":
         if st.button("Distribucion de idioma de canciones"):
             cambiar_subpagina("subcategoria_b")  
         if st.button("Subcategoría C"):
-            cambiar_subpagina("subcategoria_c")
+            cambiar_subpagina("Tendencia De lanzamiento de canciones")
         if st.button("Subcategoría D"):
             cambiar_subpagina("subcategoria_d")
         if st.button("Subcategoría E"):
@@ -124,6 +124,15 @@ elif st.session_state.page == "categoría_2":
         elif st.session_state.subpage == "subcategoria_c":
             st.header("Subcategoría C")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
+            pf['release_date'] = pd.to_datetime(spotify_data['release_date'], errors='coerce')
+            pf_filtrado = pf.dropna(subset=['release_date'])
+            pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
+            pf_filtrado['month'] = pf_filtrado['release_date'].dt.month
+            fig = px.line(pf_filtered, x='year', y='release_date', 
+              title="Tendencia de Lanzamientos de Canciones por Año",
+              labels={'release_date': 'Número de Lanzamientos', 'year': 'Año'},
+              line_shape='linear')
+            st.plotly_chart(fig)
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D")
             st.write("Aquí se mostrarán los datos de la Subcategoría D.")
