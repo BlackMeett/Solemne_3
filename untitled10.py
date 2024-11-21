@@ -87,7 +87,7 @@ elif st.session_state.page == "categoría_2":
             cambiar_subpagina("subcategoria_b")  
         if st.button("Tendencia De lanzamiento de canciones"):
             cambiar_subpagina("subcategoria_c")
-        if st.button("Subcategoría D"):
+        if st.button("Duración Promedio por Género"):
             cambiar_subpagina("subcategoria_d")
         if st.button("Subcategoría E"):
             cambiar_subpagina("subcategoria_e")
@@ -158,8 +158,22 @@ elif st.session_state.page == "categoría_2":
             st.pyplot(fig)
 
         elif st.session_state.subpage == "subcategoria_d":
-            st.header("Subcategoría D")
-            st.write("Aquí se mostrarán los datos de la Subcategoría D.")
+            st.header("Subcategoría D: Duración Promedio de Canciones por Género")
+            
+            # Filtrar el dataset para asegurarnos de que no haya valores nulos en las columnas necesarias
+            pf_filtrado_duracion = pf.dropna(subset=['genre', 'duration_ms'])
+            
+            # Calcular la duración promedio en minutos por género
+            duracion_promedio = pf_filtrado_duracion.groupby('genre')['duration_ms'].mean() / 60000  # Convertir de ms a minutos
+            
+            # Crear la gráfica de barras
+            fig, ax = plt.subplots(figsize=(12, 8))
+            duracion_promedio.sort_values().plot(kind='barh', ax=ax, color='purple')
+            ax.set_title('Duración Promedio de Canciones por Género (en minutos)')
+            ax.set_xlabel('Duración Promedio (minutos)')
+            ax.set_ylabel('Género')
+            plt.tight_layout()
+            st.pyplot(fig)
         
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
@@ -175,6 +189,7 @@ elif st.session_state.page == "categoría_3":
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
+
 
 
 
