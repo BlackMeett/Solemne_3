@@ -57,6 +57,18 @@ if st.session_state.page == "inicio":
     with col1:
         if st.button("Opción 1"):
             cambiar_pagina("categoría_1")
+            data_filtrada = pf.dropna(subset=['genre', 'explicit_content'])
+            contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
+            
+            fig, ax = plt.subplots(figsize=(12, 8))
+            contenido_explicito.plot(kind='bar', stacked=True, ax=ax)
+            ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
+            ax.set_xlabel('Género')
+            ax.set_ylabel('Número de Canciones')
+            ax.legend(title='Contenido Explícito', labels=['No', 'Sí'])
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
+            plt.tight_layout()
+            st.pyplot(fig)
     
     with col2:
         if st.button("Opción 2"):
@@ -127,27 +139,27 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría C")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
             
-            # Convertir la columna 'release_date' a formato datetime
+           
             pf['release_date'] = pd.to_datetime(pf['release_date'], errors='coerce')
             pf_filtrado = pf.dropna(subset=['release_date'])
             pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
 
-            # Añadir un selector de género
+            
             generos = pf_filtrado['genre'].dropna().unique()
             genero_seleccionado = st.selectbox('Selecciona un género musical:', options=generos)
 
-            # Filtrar el DataFrame por el género seleccionado
+            
             pf_filtrado_genero = pf_filtrado[pf_filtrado['genre'] == genero_seleccionado]
 
-            # Seleccionar el rango de años usando un slider
+            
             min_year = int(pf_filtrado_genero['year'].min())
             max_year = int(pf_filtrado_genero['year'].max())
             rango_años = st.slider('Selecciona el rango de años:', min_year, max_year, (min_year, max_year))
 
-            # Filtrar por el rango de años seleccionado
+           
             pf_filtrado_rango = pf_filtrado_genero[(pf_filtrado_genero['year'] >= rango_años[0]) & (pf_filtrado_genero['year'] <= rango_años[1])]
 
-            # Crear la gráfica de la tendencia de lanzamientos
+            
             releases_by_year = pf_filtrado_rango.groupby('year').size()
             
             fig, ax = plt.subplots(figsize=(10, 6))
