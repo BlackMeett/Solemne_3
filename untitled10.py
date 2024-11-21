@@ -128,11 +128,14 @@ elif st.session_state.page == "categoría_2":
             pf_filtrado = pf.dropna(subset=['release_date'])
             pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
             pf_filtrado['month'] = pf_filtrado['release_date'].dt.month
-            fig = px.line(pf_filtrado, x='year', y='release_date', 
-              title="Tendencia de Lanzamientos de Canciones por Año",
-              labels={'release_date': 'Número de Lanzamientos', 'year': 'Año'},
-              line_shape='linear')
-            st.plotly_chart(fig)
+            releases_by_year = pf_filtrado.groupby('year').size()
+            plt.figure(figsize=(10, 6))
+            plt.plot(releases_by_year.index, releases_by_year.values, marker='o')
+            plt.title("Tendencia de Lanzamientos de Canciones por Año")
+            plt.xlabel("Año")
+            plt.ylabel("Número de Canciones")
+            plt.grid(True)
+            st.pyplot(plt)
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D")
             st.write("Aquí se mostrarán los datos de la Subcategoría D.")
