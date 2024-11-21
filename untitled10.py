@@ -3,7 +3,6 @@ import base64
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Cargar el dataset
 pf = pd.read_csv("spotify_songs_dataset.csv")
 image_path = "fondo_morado.png"  
 
@@ -69,7 +68,7 @@ if st.session_state.page == "inicio":
 elif st.session_state.page == "categoría_1":
     st.header("Contenido de Opción 1")
     st.write("Aquí se mostrarán los datos relacionados con la Opción 1.")
-    pf
+    st.write(pf)  # Muestra el DataFrame para que los usuarios lo vean
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
@@ -80,12 +79,12 @@ elif st.session_state.page == "categoría_2":
         st.header("Seleccione una subcategoría")
         
         # Mostrar botones para las subcategorías
-        if st.button("Grafico De contenido Explicito"):
+        if st.button("Gráfico de contenido Explícito"):
             cambiar_subpagina("subcategoria_a")
 
-        if st.button("Distribucion de idioma de canciones"):
+        if st.button("Distribución de idioma de canciones"):
             cambiar_subpagina("subcategoria_b")  
-        if st.button("Tendencia De lanzamiento de canciones"):
+        if st.button("Tendencia de lanzamiento de canciones"):
             cambiar_subpagina("subcategoria_c")
         if st.button("Subcategoría D"):
             cambiar_subpagina("subcategoria_d")
@@ -121,28 +120,29 @@ elif st.session_state.page == "categoría_2":
             ax.pie(contador_lenguaje, labels=contador_lenguaje.index, autopct='%1.1f%%', startangle=140, colors=plt.cm.tab20.colors)
             ax.set_title('Distribución de Canciones por Idioma')
             st.pyplot(fig)
-        
+
         elif st.session_state.subpage == "subcategoria_c":
             st.header("Subcategoría C")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
-            # Agregar el gráfico de la tendencia de lanzamiento de canciones
-            pf['release_date'] = pd.to_datetime(pf['release_date'], errors='coerce')
-            pf_filtrado = pf.dropna(subset=['release_date'])
-            pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
-            releases_by_year = pf_filtrado.groupby('year').size()
             
-            # Crear el gráfico de la tendencia de lanzamientos
-            fig, ax = plt.subplots(figsize=(10, 6))
-            ax.plot(releases_by_year.index, releases_by_year.values, marker='o')
-            ax.set_title("Tendencia de Lanzamientos de Canciones por Año")
-            ax.set_xlabel("Año")
-            ax.set_ylabel("Número de Canciones")
-            ax.grid(True)
-            st.pyplot(fig)
-
+            # Hacerlo interactivo: permitir que el usuario seleccione un género
+            generos = pf['genre'].unique()  # Obtener la lista de géneros únicos
+            genero_seleccionado = st.selectbox("Selecciona un género:", generos)
+            
+            # Filtrar las canciones por el género seleccionado
+            canciones_genero = pf[pf['genre'] == genero_seleccionado]
+            
+            # Mostrar las canciones del género seleccionado
+            if not canciones_genero.empty:
+                st.write(f"Mostrando canciones del género: {genero_seleccionado}")
+                st.write(canciones_genero[['name', 'artist', 'explicit_content']])
+            else:
+                st.write("No hay canciones para este género.")
+            
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D")
             st.write("Aquí se mostrarán los datos de la Subcategoría D.")
+        
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.")
