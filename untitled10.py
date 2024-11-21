@@ -5,15 +5,13 @@ import matplotlib.pyplot as plt
 
 # Cargar el dataset
 pf = pd.read_csv("spotify_songs_dataset.csv")
-
-# Ruta de la imagen para el fondo
-image_path = "fondo_morado.png"
+image_path = "fondo_morado.png"  
 
 # Codificar la imagen en base64
 with open(image_path, "rb") as img_file:
     base64_image = base64.b64encode(img_file.read()).decode()
 
-# Estilo de fondo para la aplicación
+# Aplicar estilo de fondo a la aplicación
 st.markdown(
     f"""
     <style>
@@ -28,18 +26,18 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Configuración inicial de las páginas y subpáginas
+# Configuración inicial para la página y subpágina actual
 if "page" not in st.session_state:
     st.session_state.page = "inicio"
 
 if "subpage" not in st.session_state:
     st.session_state.subpage = None
 
-# Función para cambiar la página
+# Función para cambiar la página principal
 def cambiar_pagina(nueva_pagina):
     st.session_state.page = nueva_pagina
     if nueva_pagina != "categoría_2":
-        st.session_state.subpage = None  # Resetear subpáginas cuando no estamos en categoría_2
+        st.session_state.subpage = None  # Resetear la subpágina solo si no estamos en "categoría_2"
 
 # Función para cambiar la subpágina dentro de "Tipos"
 def cambiar_subpagina(nueva_subpagina):
@@ -48,66 +46,63 @@ def cambiar_subpagina(nueva_subpagina):
 # Título de la aplicación
 st.title("Aplicación Genérica")
 
-# Página de inicio con opciones
+# Mostrar botones solo si estamos en la página de inicio
 if st.session_state.page == "inicio":
     st.header("Seleccione una opción")
-
-    # Disposición de botones en columnas
+    
+    # Utilizar columnas para alinear los botones horizontalmente
     col1, col2, col3 = st.columns(3)
-
+    
     with col1:
         if st.button("Opción 1"):
             cambiar_pagina("categoría_1")
-
+    
     with col2:
         if st.button("Opción 2"):
             cambiar_pagina("categoría_2")
-
+    
     with col3:
         if st.button("Opción 3"):
             cambiar_pagina("categoría_3")
 
-# Página "Categoría 1"
+# Mostrar contenido según la página seleccionada
 elif st.session_state.page == "categoría_1":
     st.header("Contenido de Opción 1")
     st.write("Aquí se mostrarán los datos relacionados con la Opción 1.")
-    st.write(pf)  # Muestra el DataFrame
-
+    pf
+    
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
 
-# Página "Categoría 2"
 elif st.session_state.page == "categoría_2":
+    # Manejar las subpáginas de la categoría "Opción 2"
     if st.session_state.subpage is None:
         st.header("Seleccione una subcategoría")
-
-        # Botones de subcategorías
-        if st.button("Gráfico de contenido Explícito"):
+        
+        # Mostrar botones para las subcategorías
+        if st.button("Grafico De contenido Explicito"):
             cambiar_subpagina("subcategoria_a")
 
-        if st.button("Distribución de idioma de canciones"):
-            cambiar_subpagina("subcategoria_b")
-
-        if st.button("Tendencia de lanzamiento de canciones"):
+        if st.button("Distribucion de idioma de canciones"):
+            cambiar_subpagina("subcategoria_b")  
+        if st.button("Tendencia De lanzamiento de canciones"):
             cambiar_subpagina("subcategoria_c")
-
         if st.button("Subcategoría D"):
             cambiar_subpagina("subcategoria_d")
-
         if st.button("Subcategoría E"):
             cambiar_subpagina("subcategoria_e")
-
+        
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
-
-    # Manejo de subpáginas
+    
+    # Manejo de subpáginas específicas
     else:
         if st.session_state.subpage == "subcategoria_a":
             st.header("Subcategoría A")
-            st.write("Gráfico de canciones con contenido explícito por género.")
+            st.write("Aquí se mostrarán los datos de la Subcategoría A.")
             data_filtrada = pf.dropna(subset=['genre', 'explicit_content'])
             contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
-
+            
             fig, ax = plt.subplots(figsize=(12, 8))
             contenido_explicito.plot(kind='bar', stacked=True, ax=ax)
             ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
@@ -117,52 +112,52 @@ elif st.session_state.page == "categoría_2":
             ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
             plt.tight_layout()
             st.pyplot(fig)
-
+            
         elif st.session_state.subpage == "subcategoria_b":
             st.header("Subcategoría B")
-            st.write("Distribución de canciones por idioma.")
+            st.write("Aquí se mostrarán los datos de la Subcategoría B.")
             contador_lenguaje = pf["language"].value_counts()
             fig, ax = plt.subplots(figsize=(10, 8))
             ax.pie(contador_lenguaje, labels=contador_lenguaje.index, autopct='%1.1f%%', startangle=140, colors=plt.cm.tab20.colors)
             ax.set_title('Distribución de Canciones por Idioma')
             st.pyplot(fig)
-
+        
         elif st.session_state.subpage == "subcategoria_c":
             st.header("Subcategoría C")
-            st.write("Selección de género musical y visualización de canciones.")
+            st.write("Aquí se mostrarán los datos de la Subcategoría C.")
+            # Agregar el gráfico de la tendencia de lanzamiento de canciones
+            pf['release_date'] = pd.to_datetime(pf['release_date'], errors='coerce')
+            pf_filtrado = pf.dropna(subset=['release_date'])
+            pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
+            releases_by_year = pf_filtrado.groupby('year').size()
             
-            # Mostrar lista de géneros disponibles
-            generos = pf['genre'].unique()
-            genero_seleccionado = st.selectbox("Selecciona un género:", generos)
-
-            # Filtrar y mostrar las canciones del género seleccionado
-            canciones_genero = pf[pf['genre'] == genero_seleccionado]
-            
-            if not canciones_genero.empty:
-                st.write(f"Mostrando canciones del género: {genero_seleccionado}")
-                st.write(canciones_genero[['song_name', 'artist', 'explicit_content']])
-            else:
-                st.write("No hay canciones para este género.")
+            # Crear el gráfico de la tendencia de lanzamientos
+            fig, ax = plt.subplots(figsize=(10, 6))
+            ax.plot(releases_by_year.index, releases_by_year.values, marker='o')
+            ax.set_title("Tendencia de Lanzamientos de Canciones por Año")
+            ax.set_xlabel("Año")
+            ax.set_ylabel("Número de Canciones")
+            ax.grid(True)
+            st.pyplot(fig)
 
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D")
-            st.write("Información sobre la Subcategoría D.")
-
+            st.write("Aquí se mostrarán los datos de la Subcategoría D.")
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
-            st.write("Información sobre la Subcategoría E.")
-
-        # Botón para volver a subcategorías
+            st.write("Aquí se mostrarán los datos de la Subcategoría E.")
+        
+        # Botón para volver a la lista de subcategorías sin salir de "categoría_2"
         if st.button("Volver a subcategorías"):
             st.session_state.subpage = None
 
-# Página "Categoría 3"
 elif st.session_state.page == "categoría_3":
     st.header("Contenido de Opción 3")
-    st.write("Contenido libre de la Opción 3.")
+    st.write("Aquí se puede explorar la Opción 3 de forma libre.")
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
+
 
 
 
