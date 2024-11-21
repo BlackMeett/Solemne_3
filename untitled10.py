@@ -140,7 +140,7 @@ elif st.session_state.page == "categoría_2":
             
             if not canciones_genero.empty:
                 st.write(f"Mostrando canciones del género: {genero_seleccionado}")
-                st.write(canciones_genero[['name', 'artist', 'explicit_content']])
+                st.write(canciones_genero[['song_name', 'artist', 'explicit_content']])
             else:
                 st.write("No hay canciones para este género.")
 
