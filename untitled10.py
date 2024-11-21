@@ -124,7 +124,7 @@ elif st.session_state.page == "categoría_2":
         elif st.session_state.subpage == "subcategoria_c":
             st.header("Subcategoría C")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
-            pf['release_date'] = pd.to_datetime(spotify_data['release_date'], errors='coerce')
+            pf['release_date'] = pd.to_datetime(pf['release_date'], errors='coerce')
             pf_filtrado = pf.dropna(subset=['release_date'])
             pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
             pf_filtrado['month'] = pf_filtrado['release_date'].dt.month
