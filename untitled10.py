@@ -161,10 +161,10 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría D: Duración Promedio de Canciones por Género")
             
             # Filtrar el dataset para asegurarnos de que no haya valores nulos en las columnas necesarias
-            pf_filtrado_duracion = pf.dropna(subset=['genre', 'duration_ms'])
+            pf_filtrado_duracion = pf.dropna(subset=['genre', 'duration'])
             
             # Convertir duración de milisegundos a minutos
-            pf_filtrado_duracion['duration_min'] = pf_filtrado_duracion['duration_ms'] / 60000  # Convertir ms a minutos
+            pf_filtrado_duracion['duration_min'] = pf_filtrado_duracion['duration'] / 60000  # Convertir ms a minutos
             
             # Calcular la duración promedio en minutos por género
             duracion_promedio = pf_filtrado_duracion.groupby('genre')['duration_min'].mean()
