@@ -159,43 +159,23 @@ elif st.session_state.page == "categoría_2":
             st.pyplot(fig)
 
         elif st.session_state.subpage == "subcategoria_d":
-            st.header("Subcategoría D: Duración Promedio de Canciones por Género")
-            
-            # Filtrar el dataset para asegurarnos de que no haya valores nulos en las columnas necesarias
+            st.header("Subcategoría D: Duración Promedio de Canciones por Género") 
             pf_filtrado_duracion = pf.dropna(subset=['genre', 'duration'])
-            
-            # Convertir duración de milisegundos a minutos
-            pf_filtrado_duracion['duration_min'] = pf_filtrado_duracion['duration'] / 60000  # Convertir ms a minutos
-            
-            # Calcular la duración promedio en minutos por género
+            pf_filtrado_duracion['duration_min'] = pf_filtrado_duracion['duration'] / 60
             duracion_promedio = pf_filtrado_duracion.groupby('genre')['duration_min'].mean()
-            
-            # Selección del género a mostrar
-            genero_seleccionado = st.selectbox("Selecciona un género para ver la duración promedio:", duracion_promedio.index)
-
-            # Mostrar la duración promedio del género seleccionado
-            st.write(f"Duración promedio para el género **{genero_seleccionado}**: {duracion_promedio[genero_seleccionado]:.2f} minutos.")
-            
-            # Crear la gráfica de barras de duración promedio
-            fig, ax = plt.subplots(figsize=(12, 8))
-            duracion_promedio.sort_values().plot(kind='barh', ax=ax, color='purple')
-            ax.set_title('Duración Promedio de Canciones por Género (en minutos)')
-            ax.set_xlabel('Duración Promedio (minutos)')
-            ax.set_ylabel('Género')
-            plt.tight_layout()
-
-            st.pyplot(fig)
-
-            # Mostrar los géneros disponibles y la opción para verlos todos
-            if st.button("Ver todos los géneros"):
-                fig, ax = plt.subplots(figsize=(12, 8))
-                duracion_promedio.sort_values().plot(kind='barh', ax=ax, color='purple')
-                ax.set_title('Duración Promedio de Canciones por Género (en minutos)')
-                ax.set_xlabel('Duración Promedio (minutos)')
-                ax.set_ylabel('Género')
-                plt.tight_layout()
-                st.pyplot(fig)
-        
+            canciones_por_genero = pf_filtrado_duracion['genre'].value_counts()
+            generos_populares = canciones_por_genero.head(10).index
+            duracion_promedio_populares = duracion_promedio[duracion_promedio.index.isin(generos_populares)]
+            fig = px.bar(
+            duracion_promedio_populares.sort_values(),
+            x=duracion_promedio_populares.sort_values().index,
+            y=duracion_promedio_populares.sort_values(),
+            labels={'x': 'Género', 'y': 'Duración Promedio (minutos)'},
+            title='Duración Promedio de Canciones por Género (Top 10 Géneros con Más Canciones)',
+            color=duracion_promedio_populares.sort_values(),
+            color_continuous_scale='Viridis')
+            st.plotly_chart(fig)
+                 
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.")
