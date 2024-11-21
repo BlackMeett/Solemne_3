@@ -1,7 +1,6 @@
 import streamlit as st
 import base64
 import pandas as pd
-import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
 # Cargar el dataset
@@ -176,39 +175,48 @@ elif st.session_state.page == "categoría_2":
             # Mostrar la duración promedio del género seleccionado
             st.write(f"Duración promedio para el género **{genero_seleccionado}**: {duracion_promedio[genero_seleccionado]:.2f} minutos.")
             
-            # Crear la gráfica de barras de duración promedio
-            fig, ax = plt.subplots(figsize=(12, 8))
-            duracion_promedio.sort_values().plot(kind='barh', ax=ax, color='purple')
-            ax.set_title('Duración Promedio de Canciones por Género (en minutos)')
-            ax.set_xlabel('Duración Promedio (minutos)')
-            ax.set_ylabel('Género')
-            plt.tight_layout()
+            # Crear el gráfico interactivo con Plotly
+            fig = go.Figure(go.Bar(
+                x=duracion_promedio.index,
+                y=duracion_promedio.values,
+                orientation='h',
+                marker=dict(color='purple')
+            ))
 
-            st.pyplot(fig)
+            fig.update_layout(
+                title="Duración Promedio de Canciones por Género (en minutos)",
+                xaxis_title="Duración Promedio (minutos)",
+                yaxis_title="Género",
+                template="plotly_dark"
+            )
+
+            st.plotly_chart(fig)
 
             # Mostrar los géneros disponibles y la opción para verlos todos
             if st.button("Ver todos los géneros"):
-                fig, ax = plt.subplots(figsize=(12, 8))
-                duracion_promedio.sort_values().plot(kind='barh', ax=ax, color='purple')
-                ax.set_title('Duración Promedio de Canciones por Género (en minutos)')
-                ax.set_xlabel('Duración Promedio (minutos)')
-                ax.set_ylabel('Género')
-                plt.tight_layout()
-                st.pyplot(fig)
-        
+                fig = go.Figure(go.Bar(
+                    x=duracion_promedio.index,
+                    y=duracion_promedio.values,
+                    orientation='h',
+                    marker=dict(color='purple')
+                ))
+
+                fig.update_layout(
+                    title="Duración Promedio de Canciones por Género (en minutos)",
+                    xaxis_title="Duración Promedio (minutos)",
+                    yaxis_title="Género",
+                    template="plotly_dark"
+                )
+                st.plotly_chart(fig)
+            
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.")
-
+        
+        # Botón para volver a la página de inicio
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
 
-elif st.session_state.page == "categoría_3":
-    st.header("Contenido de Opción 3")
-    st.write("Aquí se mostrarán los datos relacionados con la Opción 3.")
-    
-    if st.button("Volver atrás"):
-        cambiar_pagina("inicio")
 
 
 
