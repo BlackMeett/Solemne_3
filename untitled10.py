@@ -69,7 +69,7 @@ if st.session_state.page == "inicio":
 elif st.session_state.page == "categoría_1":
     st.header("Contenido de Opción 1")
     st.write("Aquí se mostrarán los datos relacionados con la Opción 1.")
-    pf
+    st.write(pf)
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
@@ -125,16 +125,33 @@ elif st.session_state.page == "categoría_2":
         elif st.session_state.subpage == "subcategoria_c":
             st.header("Subcategoría C")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
-            # Agregar el gráfico de la tendencia de lanzamiento de canciones
+            
+            # Convertir la columna 'release_date' a formato datetime
             pf['release_date'] = pd.to_datetime(pf['release_date'], errors='coerce')
             pf_filtrado = pf.dropna(subset=['release_date'])
             pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
-            releases_by_year = pf_filtrado.groupby('year').size()
+
+            # Añadir un selector de género
+            generos = pf_filtrado['genre'].dropna().unique()
+            genero_seleccionado = st.selectbox('Selecciona un género musical:', options=generos)
+
+            # Filtrar el DataFrame por el género seleccionado
+            pf_filtrado_genero = pf_filtrado[pf_filtrado['genre'] == genero_seleccionado]
+
+            # Seleccionar el rango de años usando un slider
+            min_year = int(pf_filtrado_genero['year'].min())
+            max_year = int(pf_filtrado_genero['year'].max())
+            rango_años = st.slider('Selecciona el rango de años:', min_year, max_year, (min_year, max_year))
+
+            # Filtrar por el rango de años seleccionado
+            pf_filtrado_rango = pf_filtrado_genero[(pf_filtrado_genero['year'] >= rango_años[0]) & (pf_filtrado_genero['year'] <= rango_años[1])]
+
+            # Crear la gráfica de la tendencia de lanzamientos
+            releases_by_year = pf_filtrado_rango.groupby('year').size()
             
-            # Crear el gráfico de la tendencia de lanzamientos
             fig, ax = plt.subplots(figsize=(10, 6))
             ax.plot(releases_by_year.index, releases_by_year.values, marker='o')
-            ax.set_title("Tendencia de Lanzamientos de Canciones por Año")
+            ax.set_title(f"Tendencia de Lanzamientos de Canciones en {genero_seleccionado} ({rango_años[0]}-{rango_años[1]})")
             ax.set_xlabel("Año")
             ax.set_ylabel("Número de Canciones")
             ax.grid(True)
@@ -143,6 +160,7 @@ elif st.session_state.page == "categoría_2":
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D")
             st.write("Aquí se mostrarán los datos de la Subcategoría D.")
+        
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.")
@@ -157,6 +175,7 @@ elif st.session_state.page == "categoría_3":
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
+
 
 
 
