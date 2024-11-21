@@ -3,7 +3,7 @@ import base64
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
+# Cargar el dataset
 pf = pd.read_csv("spotify_songs_dataset.csv")
 image_path = "fondo_morado.png"  
 
@@ -85,8 +85,8 @@ elif st.session_state.page == "categoría_2":
 
         if st.button("Distribucion de idioma de canciones"):
             cambiar_subpagina("subcategoria_b")  
-        if st.button("Subcategoría C"):
-            cambiar_subpagina("Tendencia De lanzamiento de canciones")
+        if st.button("Tendencia De lanzamiento de canciones"):
+            cambiar_subpagina("subcategoria_c")
         if st.button("Subcategoría D"):
             cambiar_subpagina("subcategoria_d")
         if st.button("Subcategoría E"):
@@ -121,10 +121,25 @@ elif st.session_state.page == "categoría_2":
             ax.pie(contador_lenguaje, labels=contador_lenguaje.index, autopct='%1.1f%%', startangle=140, colors=plt.cm.tab20.colors)
             ax.set_title('Distribución de Canciones por Idioma')
             st.pyplot(fig)
+        
         elif st.session_state.subpage == "subcategoria_c":
             st.header("Subcategoría C")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
-            st.write("hola")
+            # Agregar el gráfico de la tendencia de lanzamiento de canciones
+            pf['release_date'] = pd.to_datetime(pf['release_date'], errors='coerce')
+            pf_filtrado = pf.dropna(subset=['release_date'])
+            pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
+            releases_by_year = pf_filtrado.groupby('year').size()
+            
+            # Crear el gráfico de la tendencia de lanzamientos
+            fig, ax = plt.subplots(figsize=(10, 6))
+            ax.plot(releases_by_year.index, releases_by_year.values, marker='o')
+            ax.set_title("Tendencia de Lanzamientos de Canciones por Año")
+            ax.set_xlabel("Año")
+            ax.set_ylabel("Número de Canciones")
+            ax.grid(True)
+            st.pyplot(fig)
+
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D")
             st.write("Aquí se mostrarán los datos de la Subcategoría D.")
