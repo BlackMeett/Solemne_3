@@ -166,16 +166,13 @@ elif st.session_state.page == "categoría_2":
             canciones_por_genero = pf_filtrado_duracion['genre'].value_counts()
             generos_populares = canciones_por_genero.head(10).index
             duracion_promedio_populares = duracion_promedio[duracion_promedio.index.isin(generos_populares)]
-            fig = px.bar(
-            duracion_promedio_populares.sort_values(),
-            x=duracion_promedio_populares.sort_values().index,
-            y=duracion_promedio_populares.sort_values(),
-            labels={'x': 'Género', 'y': 'Duración Promedio (minutos)'},
-            title='Duración Promedio de Canciones por Género (Top 10 Géneros con Más Canciones)',
-            color=duracion_promedio_populares.sort_values(),
-            color_continuous_scale='Viridis')
-            st.plotly_chart(fig)
-                 
+            plt.figure(figsize=(10, 6))
+            duracion_promedio_populares.sort_values().plot(kind='bar', color='skyblue')
+            plt.title('Duración Promedio de Canciones por Género (Top 10 Géneros con Más Canciones)', fontsize=14)
+            plt.xlabel('Género', fontsize=12)
+            plt.ylabel('Duración Promedio (minutos)', fontsize=12)
+            plt.xticks(rotation=45, ha='right')   
+            st.pyplot(plt)        
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.")
