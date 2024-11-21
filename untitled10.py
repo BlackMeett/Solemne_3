@@ -125,18 +125,6 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría C")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
             st.write("hola")
-            pf['release_date'] = pd.to_datetime(pf['release_date'], errors='coerce')
-            pf_filtrado = pf.dropna(subset=['release_date'])
-            pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
-            pf_filtrado['month'] = pf_filtrado['release_date'].dt.month
-            releases_by_year = pf_filtrado.groupby('year').size()
-            plt.figure(figsize=(10, 6))
-            plt.plot(releases_by_year.index, releases_by_year.values, marker='o')
-            plt.title("Tendencia de Lanzamientos de Canciones por Año")
-            plt.xlabel("Año")
-            plt.ylabel("Número de Canciones")
-            plt.grid(True)
-            st.pyplot(plt)
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D")
             st.write("Aquí se mostrarán los datos de la Subcategoría D.")
