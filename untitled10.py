@@ -57,19 +57,6 @@ if st.session_state.page == "inicio":
     with col1:
         if st.button("Opción 1"):
             cambiar_pagina("categoría_1")
-            data_filtrada = pf.dropna(subset=['genre', 'explicit_content'])
-            contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
-            
-            fig, ax = plt.subplots(figsize=(12, 8))
-            contenido_explicito.plot(kind='bar', stacked=True, ax=ax)
-            ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
-            ax.set_xlabel('Género')
-            ax.set_ylabel('Número de Canciones')
-            ax.legend(title='Contenido Explícito', labels=['No', 'Sí'])
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
-            plt.tight_layout()
-            st.pyplot(fig)
-    
     with col2:
         if st.button("Opción 2"):
             cambiar_pagina("categoría_2")
