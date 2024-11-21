@@ -102,14 +102,16 @@ elif st.session_state.page == "categoría_2":
             st.write("Aquí se mostrarán los datos de la Subcategoría A.")
             data_filtrada = pf.dropna(subset=['genre', 'explicit_content'])
             contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
-            contenido_explicito.plot(kind='bar', stacked=True, figsize=(12, 8))
-            plt.title('Proporción de Canciones con Contenido Explícito por Género')
-            plt.xlabel('Género')
-            plt.ylabel('Número de Canciones')
-            plt.legend(title='Contenido Explícito', labels=['No', 'Sí'])
-            plt.xticks(rotation=45, ha='right')
+            
+            fig, ax = plt.subplots(figsize=(12, 8))
+            contenido_explicito.plot(kind='bar', stacked=True, ax=ax)
+            ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
+            ax.set_xlabel('Género')
+            ax.set_ylabel('Número de Canciones')
+            ax.legend(title='Contenido Explícito', labels=['No', 'Sí'])
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
             plt.tight_layout()
-            plt.show()
+            st.pyplot(fig)
             
         elif st.session_state.subpage == "subcategoria_b":
             st.header("Subcategoría B")
