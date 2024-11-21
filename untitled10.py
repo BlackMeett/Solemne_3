@@ -128,7 +128,7 @@ elif st.session_state.page == "categoría_2":
             pf_filtrado = pf.dropna(subset=['release_date'])
             pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
             pf_filtrado['month'] = pf_filtrado['release_date'].dt.month
-            fig = px.line(pf_filtered, x='year', y='release_date', 
+            fig = px.line(pf_filtrado, x='year', y='release_date', 
               title="Tendencia de Lanzamientos de Canciones por Año",
               labels={'release_date': 'Número de Lanzamientos', 'year': 'Año'},
               line_shape='linear')
