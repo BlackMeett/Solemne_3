@@ -2,6 +2,7 @@ import streamlit as st
 import base64
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 # Cargar el dataset
 pf = pd.read_csv("spotify_songs_dataset.csv")
