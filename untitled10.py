@@ -77,6 +77,7 @@ elif st.session_state.page == "categoría_1":
 elif st.session_state.page == "categoría_2":
     # Manejar las subpáginas de la categoría "Opción 2"
     if st.session_state.subpage is None:
+
         st.header("info")
         st.header("Seleccione una subcategoría")   
         # Mostrar botones para las subcategorías
@@ -100,18 +101,11 @@ elif st.session_state.page == "categoría_2":
         if st.session_state.subpage == "subcategoria_a":
             st.header("Subcategoría A")
             st.write("Aquí se mostrarán los datos de la Subcategoría A.")
-            data_filtrada = pf.dropna(subset=['genre', 'explicit_content'])
-            contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
-            
-            fig, ax = plt.subplots(figsize=(12, 8))
-            contenido_explicito.plot(kind='bar', stacked=True, ax=ax)
-            ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
-            ax.set_xlabel('Género')
-            ax.set_ylabel('Número de Canciones')
-            ax.legend(title='Contenido Explícito', labels=['No', 'Sí'])
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
-            plt.tight_layout()
-            st.pyplot(fig)
+            pf_filtrado_2 = pf.dropna(subset=['genre', 'explicit_content'])
+            opcion_contenido = st.selectbox('Selecciona el tipo de contenido:', 
+                                ['Todos', 'Contenido Explícito', 'Sin Contenido Explícito'])
+            #if opcion_contenido == 'contenido explicito':
+                #data_filtrada = pf[]
             
         elif st.session_state.subpage == "subcategoria_b":
             st.header("Subcategoría B")
