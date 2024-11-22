@@ -178,19 +178,8 @@ elif st.session_state.page == "categoría_2":
             colaboracion_si = df[df['collaboration'].notna()]    
             colaboracion_no = df[df['collaboration'].isna()]
             st.title("Visualización de Colaboraciones")
-            opcion_colaboracion = st.selectbox("Selecciona el tipo de colaboración", ("Con colaboración", "Sin colaboración"))  
-            if opcion_colaboracion == "Con colaboración":
-                datos_a_mostrar = colaboracion_si
-            else:
-                datos_a_mostrar = colaboracion_no 
-            plt.figure(figsize=(10,6))
-            conteo_colaboracion = datos_a_mostrar['colaboraton'].value_counts()
-            conteo_colaboracion.plot(kind='bar', color='skyblue')
-            plt.title(f'Frecuencia de Colaboración: {opcion_colaboracion}')
-            plt.xlabel('Colaboración')
-            plt.ylabel('Frecuencia')
-            plt.xticks(rotation=45)
-            st.pyplot()
+            opcion_colaboracion = st.selectbox("Selecciona el tipo de colaboración", ("Con colaboración", "Sin colaboración")) 
+            
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
 
