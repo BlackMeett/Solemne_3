@@ -173,7 +173,7 @@ elif st.session_state.page == "categoría_2":
             plt.xticks(rotation=45, ha='right')   
             st.pyplot(plt)        
         elif st.session_state.subpage == "subcategoria_e":
-            
+            st.write("hola")
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
 
