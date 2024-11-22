@@ -177,7 +177,9 @@ elif st.session_state.page == "categoría_2":
             st.write("Aquí se mostrarán los datos de la Subcategoría E.") 
 
             pf_numericos = pf[pd.to_numeric(pf['collaboration'], errors='coerce').notna()]
-            pf_numericos
+            pf_nan = pf[pf['collaboration'].isna()]
+            pf_nan
+            
             st.title("Visualización de Colaboraciones")
             opcion_colaboracion = st.selectbox("Selecciona el tipo de colaboración", ("Con colaboración", "Sin colaboración")) 
 
