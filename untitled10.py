@@ -118,7 +118,7 @@ elif st.session_state.page == "categoría_2":
             ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
             ax.set_xlabel('Género')
             ax.set_ylabel('Número de Canciones')
-            ax.legend(title='Contenido Explícito', labels=['No', 'Sí'])
+            #ax.legend(title='Contenido Explícito', labels=['No', 'Sí'])
             ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
             plt.tight_layout()
 
