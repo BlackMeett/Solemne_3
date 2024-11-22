@@ -114,7 +114,7 @@ elif st.session_state.page == "categoría_2":
             contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
 
             fig, ax = plt.subplots(figsize=(12, 8))
-            contenido_explicito.plot(kind='bar', stacked=True, ax=ax, color='red')
+            contenido_explicito.plot(kind='bar', stacked=True, ax=ax,)
             ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
             ax.set_xlabel('Género')
             ax.set_ylabel('Número de Canciones')
