@@ -175,8 +175,8 @@ elif st.session_state.page == "categoría_2":
         elif st.session_state.subpage == "subcategoria_e":
             pf = pf.dropna(subset=['genre', 'popularity']) 
             fig, ax = plt.subplots(figsize=(12, 8))
-            for genre in df['genre'].unique():
-                genre_data = df[df['genre'] == genre]
+            for genre in pf['genre'].unique():
+                genre_data = pf[pf['genre'] == genre]
                 ax.bar(genre_data['name'], genre_data['popularity'], label=genre, alpha=0.6)
             ax.set_title('Popularidad de Canciones por Género', fontsize=16)
             ax.set_xlabel('Nombre de Canción', fontsize=12)
