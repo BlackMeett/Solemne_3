@@ -172,25 +172,30 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría D: Duración Promedio de Canciones por Género") 
             genero_filtrado = pf[['genre', 'duration']]
             genero_filtrado = genero_filtrado.dropna(subset=['genre', 'duration'])
-            st.title("Duracion Promedio De canciones por genero")
+
+            st.title("Duración de Canciones por Género")
             genero_unico = genero_filtrado['genre'].unique()
             seleccionar_genero = st.selectbox("Selecciona un género de música:", options=['Todos'] + list(genero_unico))
-            if seleccionar_genero == 'Todos':
-                
-                duracion_por_genero = genero_filtrado.groupby('genre')['duration'].mean().sort_values()
-            else:
-                
-                duracion_por_genero = genero_filtrado[genero_filtrado['genre'] == seleccionar_genero].groupby('genre')['duration'].mean()
             fig, ax = plt.subplots(figsize=(10, 6))
-            duracion_por_genero.plot(kind='barh', ax=ax, color='skyblue')
-            ax.set_title(f'Duración Promedio de Canciones por Género' if seleccionar_genero == 'Todos' else f'Duración Promedio de Canciones en Género: {seleccionar_genero}')
-            ax.set_xlabel('Duración (segundos)')
-            ax.set_ylabel('Género')
+            if seleccionar_genero == 'Todos':
+                # Calcular la duración promedio por género y mostrarlo
+                duracion_por_genero = genero_filtrado.groupby('genre')['duration'].mean().sort_values()
+                
+                duracion_por_genero.plot(kind='barh', ax=ax, color='skyblue')
+                ax.set_title('Duración Promedio de Canciones por Género')
+                ax.set_xlabel('Duración Promedio (segundos)')
+                ax.set_ylabel('Género')
+            else:
+                # Filtrar datos solo para el género seleccionado
+                canciones_genero = genero_filtrado[genero_filtrado['genre'] == seleccionar_genero]
+                
+                # Graficar las duraciones individuales para el género seleccionado
+                ax.barh(canciones_genero.index, canciones_genero['duration'], color='lightgreen')
+                ax.set_title(f'Duración de Canciones en Género: {seleccionar_genero}')
+                ax.set_xlabel('Duración (segundos)')
+                ax.set_ylabel('Canción')
             plt.tight_layout()
-
-            # Mostrar el gráfico en Streamlit
             st.pyplot(fig)
-
         elif st.session_state.subpage == "subcategoria_e":
             st.write("hola")
         if st.button("Volver atrás"):
