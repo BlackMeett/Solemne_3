@@ -170,7 +170,7 @@ elif st.session_state.page == "categoría_2":
 
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D: Duración Promedio de Canciones por Género") 
-            genero_filtrado = pf[pf['genre','duration']]
+            genero_filtrado = pf[['genre', 'duration']]
             limpiar_columnas = genero_filtrado.dropna(subnet=['genre','duration'])
             st.title("Duracion Promedio De canciones por genero")
             genero_unico = genero_filtrado['genre'].unique()
