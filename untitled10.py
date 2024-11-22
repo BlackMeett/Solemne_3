@@ -173,16 +173,16 @@ elif st.session_state.page == "categoría_2":
             plt.xticks(rotation=45, ha='right')   
             st.pyplot(plt)        
         elif st.session_state.subpage == "subcategoria_e":
-            st.header("Subcategoría E")
-            st.write("Aquí se mostrarán los datos de la Subcategoría E.") 
-
-            pf_numericos = pf[pd.to_numeric(pf['collaboration'], errors='coerce').notna()]
-            pf_nan = pf[pf['collaboration'].isna()]
-            pf_nan
-            
-            st.title("Visualización de Colaboraciones")
-            opcion_colaboracion = st.selectbox("Selecciona el tipo de colaboración", ("Con colaboración", "Sin colaboración")) 
-
+            df_cleaned = df.dropna(subset=['genre', 'popularity'])
+            popularidad_por_genero = df_cleaned.groupby('genre')['popularity'].mean()
+            popularidad_por_genero = popularidad_por_genero.sort_values(ascending=False)
+            fig, ax = plt.subplots(figsize=(12, 8))
+            popularidad_por_genero.plot(kind='bar', ax=ax, color='skyblue')
+            ax.set_title('Popularidad Promedio por Género', fontsize=16)
+            ax.set_xlabel('Género', fontsize=12)
+            ax.set_ylabel('Popularidad Promedio', fontsize=12)
+            ax.set_xticklabels(popularidad_por_genero.index, rotation=45, ha='right')
+            st.pyplot(fig)
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
 
