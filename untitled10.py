@@ -173,8 +173,8 @@ elif st.session_state.page == "categoría_2":
             plt.xticks(rotation=45, ha='right')   
             st.pyplot(plt)        
         elif st.session_state.subpage == "subcategoria_e":
-            df_cleaned = df.dropna(subset=['genre', 'popularity'])
-            popularidad_por_genero = df_cleaned.groupby('genre')['popularity'].mean()
+            pf_cleaned = pf.dropna(subset=['genre', 'popularity'])
+            popularidad_por_genero = pf_cleaned.groupby('genre')['popularity'].mean()
             popularidad_por_genero = popularidad_por_genero.sort_values(ascending=False)
             fig, ax = plt.subplots(figsize=(12, 8))
             popularidad_por_genero.plot(kind='bar', ax=ax, color='skyblue')
