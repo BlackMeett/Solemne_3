@@ -109,7 +109,7 @@ elif st.session_state.page == "categoría_2":
             elif opcion_contenido == 'Sin Contenido Explícito':
                 data_filtrada = pf[pf['explicit_content'] == 1]
             else:
-                data_filtrada = df
+                data_filtrada = pf
             
         elif st.session_state.subpage == "subcategoria_b":
             st.header("Subcategoría B")
