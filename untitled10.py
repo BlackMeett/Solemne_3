@@ -106,9 +106,9 @@ elif st.session_state.page == "categoría_2":
             opcion_contenido = st.selectbox('Selecciona el tipo de contenido:', 
                                 ['Todos', 'Contenido Explícito', 'Sin Contenido Explícito'])
             if opcion_contenido == 'contenido explicito':
-                data_filtrada = pf[pf['explicit_content'].str.lower() == 'yes']
+                data_filtrada = pf[pf['explicit_content'] == 'yes']
             elif opcion_contenido == 'Sin Contenido Explícito':
-                data_filtrada = pf[pf['explicit_content'].str_lower() == 'no']
+                data_filtrada = pf[pf['explicit_content'] == 'no']
             else:
                 data_filtrada = pf
             contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
