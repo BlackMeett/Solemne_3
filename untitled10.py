@@ -170,8 +170,8 @@ elif st.session_state.page == "categoría_2":
 
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D: Duración Promedio de Canciones por Género") 
-            opcion_contenido = st.selectbox('Selecciona el tipo de contenido:', 
-                                [genre])      
+            generos_select = pf_filtrado['genre'].dropna().unique()
+            genero_seleccionado = st.selectbox('Selecciona un género musical:', options=generos_select)      
         elif st.session_state.subpage == "subcategoria_e":
             st.write("hola")
         if st.button("Volver atrás"):
