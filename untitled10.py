@@ -173,21 +173,7 @@ elif st.session_state.page == "categoría_2":
             plt.xticks(rotation=45, ha='right')   
             st.pyplot(plt)        
         elif st.session_state.subpage == "subcategoria_e":
-            pf = pf.dropna(subset=['genre', 'popularity']) 
-            fig, ax = plt.subplots(figsize=(12, 8))
-            for genre in pf['genre'].unique():
-                genre_data = pf[pf['genre'] == genre]
-                ax.bar(genre_data['song_title'], genre_data['popularity'], label=genre, alpha=0.6)
-            ax.set_title('Popularidad de Canciones por Género', fontsize=16)
-            ax.set_xlabel('Nombre de Canción', fontsize=12)
-            ax.set_ylabel('Popularidad', fontsize=12)
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='right')
-            ax.legend(title='Género', bbox_to_anchor=(1.05, 1), loc='upper left')
-
-            plt.tight_layout()
-
-            # Mostrar el gráfico en Streamlit
-            st.pyplot(fig)
+            
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
 
