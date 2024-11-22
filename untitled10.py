@@ -170,19 +170,8 @@ elif st.session_state.page == "categoría_2":
 
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D: Duración Promedio de Canciones por Género") 
-            pf_filtrado_duracion = pf.dropna(subset=['genre', 'duration'])
-            pf_filtrado_duracion['duration_min'] = pf_filtrado_duracion['duration'] / 60
-            duracion_promedio = pf_filtrado_duracion.groupby('genre')['duration_min'].mean()
-            canciones_por_genero = pf_filtrado_duracion['genre'].value_counts()
-            generos_populares = canciones_por_genero.head(10).index
-            duracion_promedio_populares = duracion_promedio[duracion_promedio.index.isin(generos_populares)]
-            plt.figure(figsize=(14, 10))
-            duracion_promedio_populares.sort_values().plot(kind='bar', color='skyblue')
-            plt.title('Duración Promedio de Canciones por Género (Top 10 Géneros con Más Canciones)', fontsize=14)
-            plt.xlabel('Género', fontsize=12)
-            plt.ylabel('Duración Promedio (minutos)', fontsize=12)
-            plt.xticks(rotation=45, ha='right')   
-            st.pyplot(plt)        
+            opcion_contenido = st.selectbox('Selecciona el tipo de contenido:', 
+                                ['genre'])      
         elif st.session_state.subpage == "subcategoria_e":
             st.write("hola")
         if st.button("Volver atrás"):
