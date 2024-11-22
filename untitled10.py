@@ -181,6 +181,15 @@ elif st.session_state.page == "categoría_2":
             else:
                 
                 duracion_por_genero = genero_filtrado[genero_filtrado['genre'] == seleccionar_genero].groupby('genre')['duration'].mean()
+            fig, ax = plt.subplots(figsize=(10, 6))
+            duracion_por_genero.plot(kind='barh', ax=ax, color='skyblue')
+            ax.set_title(f'Duración Promedio de Canciones por Género' if seleccionar_genero == 'Todos' else f'Duración Promedio de Canciones en Género: {seleccionar_genero}')
+            ax.set_xlabel('Duración (segundos)')
+            ax.set_ylabel('Género')
+            plt.tight_layout()
+
+            # Mostrar el gráfico en Streamlit
+            st.pyplot(fig)
 
         elif st.session_state.subpage == "subcategoria_e":
             st.write("hola")
