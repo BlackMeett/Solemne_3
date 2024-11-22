@@ -176,8 +176,8 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.") 
 
-            colaboracion_si = df['collaboration'].value_count()   
-            colaboracion_si
+            pf_colaboracion = pf['collaboration'].value_counts()
+            pf_colaboracion
             st.title("Visualización de Colaboraciones")
             opcion_colaboracion = st.selectbox("Selecciona el tipo de colaboración", ("Con colaboración", "Sin colaboración")) 
 
