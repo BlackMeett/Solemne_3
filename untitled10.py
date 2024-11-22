@@ -176,7 +176,7 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.") 
 
-            pf_colaboracion = pf['collaboration'].value_counts()
+            pf_colaboracion = [pf['collaboration'].value_counts()].notna
             pf_colaboracion
             st.title("Visualización de Colaboraciones")
             opcion_colaboracion = st.selectbox("Selecciona el tipo de colaboración", ("Con colaboración", "Sin colaboración")) 
