@@ -104,10 +104,10 @@ elif st.session_state.page == "categoría_2":
             pf_filtrado_2 = pf.dropna(subset=['genre', 'explicit_content'])
             contenido_filtrado = pf
             opcion_contenido = st.selectbox('Selecciona el tipo de contenido:', 
-                                ['Todos', 'contenido explicito', 'Sin Contenido Explícito'])
-            if opcion_contenido == 'contenido explicito':
+                                ['Todos', 'explicito', 'No_Explícito'])
+            if opcion_contenido == 'explicito':
                 data_filtrada = pf[pf['explicit_content'] == 'Yes']
-            elif opcion_contenido == 'Sin Contenido Explícito':
+            elif opcion_contenido == 'No_Explícito':
                 data_filtrada = pf[pf['explicit_content'] == 'No']
             else:
                 data_filtrada = pf
