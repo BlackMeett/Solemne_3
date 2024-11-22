@@ -77,8 +77,8 @@ elif st.session_state.page == "categoría_1":
 elif st.session_state.page == "categoría_2":
     # Manejar las subpáginas de la categoría "Opción 2"
     if st.session_state.subpage is None:
-        st.header("Seleccione una subcategoría")
-        
+        st.header("info")
+        st.header("Seleccione una subcategoría")   
         # Mostrar botones para las subcategorías
         if st.button("Grafico De contenido Explicito"):
             cambiar_subpagina("subcategoria_a")
