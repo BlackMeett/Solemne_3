@@ -110,6 +110,19 @@ elif st.session_state.page == "categoría_2":
                 data_filtrada = pf[pf['explicit_content'] == 1]
             else:
                 data_filtrada = pf
+            contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
+
+            fig, ax = plt.subplots(figsize=(12, 8))
+            contenido_explicito.plot(kind='bar', stacked=True, ax=ax)
+            ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
+            ax.set_xlabel('Género')
+            ax.set_ylabel('Número de Canciones')
+            ax.legend(title='Contenido Explícito', labels=['No', 'Sí'])
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
+            plt.tight_layout()
+
+            # Mostrar el gráfico en Streamlit
+            st.pyplot(fig)
             
         elif st.session_state.subpage == "subcategoria_b":
             st.header("Subcategoría B")
