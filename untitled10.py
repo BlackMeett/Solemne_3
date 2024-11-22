@@ -175,11 +175,11 @@ elif st.session_state.page == "categoría_2":
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.")   
-            colaboracion_si = df[df['collaboration'].notna()]    
-            colaboracion_no = df[df['collaboration'].isna()]
+            #colaboracion_si = df[df['collaboration'].notna()]    
+            #colaboracion_no = df[df['collaboration'].isna()]
             st.title("Visualización de Colaboraciones")
             opcion_colaboracion = st.selectbox("Selecciona el tipo de colaboración", ("Con colaboración", "Sin colaboración")) 
-            
+
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
 
