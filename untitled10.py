@@ -102,12 +102,13 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría A")
             st.write("Aquí se mostrarán los datos de la Subcategoría A.")
             pf_filtrado_2 = pf.dropna(subset=['genre', 'explicit_content'])
+            contenido_filtrado = pf
             opcion_contenido = st.selectbox('Selecciona el tipo de contenido:', 
                                 ['Todos', 'Contenido Explícito', 'Sin Contenido Explícito'])
             if opcion_contenido == 'contenido explicito':
-                data_filtrada = pf[pf['explicit_content'] == 1]
+                data_filtrada = pf[pf['explicit_content'] == 'Yes']
             elif opcion_contenido == 'Sin Contenido Explícito':
-                data_filtrada = pf[pf['explicit_content'] == 1]
+                data_filtrada = pf[pf['explicit_content'] == 'No']
             else:
                 data_filtrada = pf
             contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
@@ -121,7 +122,6 @@ elif st.session_state.page == "categoría_2":
             ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
             plt.tight_layout()
 
-            # Mostrar el gráfico en Streamlit
             st.pyplot(fig)
             
         elif st.session_state.subpage == "subcategoria_b":
