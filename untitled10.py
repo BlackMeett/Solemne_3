@@ -104,17 +104,17 @@ elif st.session_state.page == "categoría_2":
             pf_filtrado_2 = pf.dropna(subset=['genre', 'explicit_content'])
             contenido_filtrado = pf
             opcion_contenido = st.selectbox('Selecciona el tipo de contenido:', 
-                                ['Todos', 'explicito', 'No_Explícito'])
-            if opcion_contenido == 'explicito':
+                                ['Todos', 'contenido explicito', 'Sin Contenido Explícito'])
+            if opcion_contenido == 'contenido explicito':
                 data_filtrada = pf[pf['explicit_content'] == 'Yes']
-            elif opcion_contenido == 'No_Explícito':
+            elif opcion_contenido == 'Sin Contenido Explícito':
                 data_filtrada = pf[pf['explicit_content'] == 'No']
             else:
                 data_filtrada = pf
             contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
 
             fig, ax = plt.subplots(figsize=(12, 8))
-            contenido_explicito.plot(kind='bar', stacked=True, ax=ax)
+            contenido_explicito.plot(kind='bar', stacked=True, ax=ax, color='red')
             ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
             ax.set_xlabel('Género')
             ax.set_ylabel('Número de Canciones')
