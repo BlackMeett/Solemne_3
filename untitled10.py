@@ -170,9 +170,18 @@ elif st.session_state.page == "categoría_2":
 
         elif st.session_state.subpage == "subcategoria_d":
             st.header("Subcategoría D: Duración Promedio de Canciones por Género") 
-            generos_unicos = pf['genre'].dropna().unique().tolist()
-            generos_unicos.insert(0, 'Todos') 
-            genero_seleccionado = st.selectbox('Selecciona el género a visualizar:', generos_unicos)      
+            genero_filtrado = pf[pf['genre','duration']]
+            limpiar_columnas = genero_filtrado.dropna(subnet=['genre','duration'])
+            st.title("Duracion Promedio De canciones por genero")
+            genero_unico = genero_filtrado['genre'].unique()
+            seleccionar_genero = st.selectbox("Selecciona un género de música:", options=['Todos'] + list(genero_unico))
+            if seleccionar_genero == 'Todos':
+                
+                duracion_por_genero = genero_filtrado.groupby('genre')['duration'].mean().sort_values()
+            else:
+                
+                duracion_por_genero = genero_filtrado[genero_filtrado['genre'] == seleccionar_genero].groupby('genre')['duration'].mean()
+
         elif st.session_state.subpage == "subcategoria_e":
             st.write("hola")
         if st.button("Volver atrás"):
