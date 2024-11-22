@@ -175,7 +175,35 @@ elif st.session_state.page == "categoría_2":
         elif st.session_state.subpage == "subcategoria_e":
             st.header("Subcategoría E")
             st.write("Aquí se mostrarán los datos de la Subcategoría E.")
+            pf['collaboration'].fillna('Unknown', inplace=True)
 
+            # Opciones de filtro para la colaboración
+            opciones_colaboracion = ['Todas', 'Con Colaboración', 'Sin Colaboración']
+            seleccion_colaboracion = st.selectbox('Selecciona el tipo de colaboración a visualizar:', opciones_colaboracion)
+
+            # Filtrar datos según la selección
+            if seleccion_colaboracion == 'Con Colaboración':
+                pf_filtrado = pf[pf['collaboration'] == 'Yes']
+            elif seleccion_colaboracion == 'Sin Colaboración':
+                pf_filtrado = pf[pf['collaboration'] == 'No']
+            else:
+                pf_filtrado = pf
+
+            # Contar colaboraciones filtradas
+            collab_counts = pf_filtrado['collaboration'].value_counts()
+
+            # Crear gráfico de barras
+            fig, ax = plt.subplots(figsize=(8, 6))
+            collab_counts.plot(kind='bar', ax=ax, color=['skyblue', 'orange', 'gray'])
+
+            # Configurar el gráfico
+            ax.set_title('Número de Canciones por Tipo de Colaboración')
+            ax.set_xlabel('Tipo de Colaboración')
+            ax.set_ylabel('Número de Canciones')
+            ax.set_xticklabels(['No', 'Sí', 'Desconocido'], rotation=0)
+
+            # Mostrar gráfico en Streamlit
+            st.pyplot(fig)
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
 
