@@ -104,8 +104,12 @@ elif st.session_state.page == "categoría_2":
             pf_filtrado_2 = pf.dropna(subset=['genre', 'explicit_content'])
             opcion_contenido = st.selectbox('Selecciona el tipo de contenido:', 
                                 ['Todos', 'Contenido Explícito', 'Sin Contenido Explícito'])
-            #if opcion_contenido == 'contenido explicito':
-                #data_filtrada = pf[]
+            if opcion_contenido == 'contenido explicito':
+                data_filtrada = pf[pf['explicit_content'] == 1]
+            elif opcion_contenido == 'Sin Contenido Explícito':
+                data_filtrada = pf[pf['explicit_content'] == 1]
+            else:
+                data_filtrada = df
             
         elif st.session_state.subpage == "subcategoria_b":
             st.header("Subcategoría B")
