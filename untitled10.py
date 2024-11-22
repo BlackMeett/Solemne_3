@@ -190,7 +190,7 @@ elif st.session_state.page == "categoría_2":
                 canciones_genero = genero_filtrado[genero_filtrado['genre'] == seleccionar_genero]
                 
                 # Graficar las duraciones individuales para el género seleccionado
-                ax.barh(canciones_genero.index, canciones_genero['duration'], color='lightgreen')
+                ax.barh(canciones_genero.index, canciones_genero['duration'], color='red')
                 ax.set_title(f'Duración de Canciones en Género: {seleccionar_genero}')
                 ax.set_xlabel('Duración (segundos)')
                 ax.set_ylabel('Canción')
