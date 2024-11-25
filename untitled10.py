@@ -37,7 +37,8 @@ if "subpage" not in st.session_state:
 # Función para cambiar la página principal
 def cambiar_pagina(nueva_pagina):
     st.session_state.page = nueva_pagina
-    st.session_state.subpage = None  # Resetear subpágina cada vez que cambiamos de página principal
+    if nueva_pagina != "categoría_2":
+        st.session_state.subpage = None  # Resetear la subpágina solo si no estamos en "categoría_2"
 
 # Función para cambiar la subpágina dentro de "Tipos"
 def cambiar_subpagina(nueva_subpagina):
@@ -80,10 +81,10 @@ elif st.session_state.page == "categoría_2":
         st.header("info")
         st.header("Seleccione una subcategoría")   
         # Mostrar botones para las subcategorías
-        if st.button("Gráfico De contenido Explícito"):
+        if st.button("Grafico De contenido Explicito"):
             cambiar_subpagina("subcategoria_a")
 
-        if st.button("Distribución de idioma de canciones"):
+        if st.button("Distribucion de idioma de canciones"):
             cambiar_subpagina("subcategoria_b")  
         if st.button("Tendencia De lanzamiento de canciones"):
             cambiar_subpagina("subcategoria_c")
@@ -117,6 +118,7 @@ elif st.session_state.page == "categoría_2":
             ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
             ax.set_xlabel('Género')
             ax.set_ylabel('Número de Canciones')
+            #ax.legend(title='Contenido Explícito', labels=['No', 'Sí'])
             ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
             plt.tight_layout()
 
@@ -135,23 +137,29 @@ elif st.session_state.page == "categoría_2":
             st.header("Subcategoría C")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
             
+           
             pf['release_date'] = pd.to_datetime(pf['release_date'], errors='coerce')
             pf_filtrado = pf.dropna(subset=['release_date'])
             pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
 
+            
             generos = pf_filtrado['genre'].dropna().unique()
             genero_seleccionado = st.selectbox('Selecciona un género musical:', options=generos)
 
+            
             pf_filtrado_genero = pf_filtrado[pf_filtrado['genre'] == genero_seleccionado]
 
+            
             min_year = int(pf_filtrado_genero['year'].min())
             max_year = int(pf_filtrado_genero['year'].max())
             rango_años = st.slider('Selecciona el rango de años:', min_year, max_year, (min_year, max_year))
 
+           
             pf_filtrado_rango = pf_filtrado_genero[(pf_filtrado_genero['year'] >= rango_años[0]) & (pf_filtrado_genero['year'] <= rango_años[1])]
 
+            
             releases_by_year = pf_filtrado_rango.groupby('year').size()
-
+            
             fig, ax = plt.subplots(figsize=(10, 6))
             ax.plot(releases_by_year.index, releases_by_year.values, marker='o')
             ax.set_title(f"Tendencia de Lanzamientos de Canciones en {genero_seleccionado} ({rango_años[0]}-{rango_años[1]})")
@@ -165,6 +173,7 @@ elif st.session_state.page == "categoría_2":
             genero_filtrado = pf[['genre', 'duration']]
             genero_filtrado = genero_filtrado.dropna(subset=['genre', 'duration'])
             
+
             st.title("Duración de Canciones por Género")
             genero_unico = genero_filtrado['genre'].unique()
             seleccionar_genero = st.selectbox("Selecciona un género de música:", options=['Todos'] + list(genero_unico))
@@ -172,6 +181,7 @@ elif st.session_state.page == "categoría_2":
             if seleccionar_genero == 'Todos':
                 # Calcular la duración promedio por género y mostrarlo
                 duracion_por_genero = genero_filtrado.groupby('genre')['duration'].mean().sort_values()
+                
                 duracion_por_genero.plot(kind='barh', ax=ax, color='skyblue')
                 ax.set_title('Duración Promedio de Canciones por Género')
                 ax.set_xlabel('Duración Promedio (segundos)')
