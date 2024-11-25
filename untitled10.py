@@ -2,11 +2,10 @@ import streamlit as st
 import base64
 import pandas as pd
 import matplotlib.pyplot as plt
-import plotly.graph_objects as go
 
 # Cargar el dataset
 pf = pd.read_csv("spotify_songs_dataset.csv")
-image_path = "fondo_morado.png"  
+image_path = "fondo_morado.png"
 
 # Codificar la imagen en base64
 with open(image_path, "rb") as img_file:
@@ -21,6 +20,70 @@ st.markdown(
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        color: #f0f0f0;
+    }}
+    
+    .stButton > button {{
+        background-color: #6a0dad;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }}
+
+    .stButton > button:hover {{
+        background-color: #9b4de1;
+    }}
+    
+    .stHeader {{
+        color: #ffffff;
+    }}
+    
+    .stTitle {{
+        font-size: 32px;
+        font-weight: bold;
+        color: #ffffff;
+    }}
+    
+    .stText {{
+        font-size: 16px;
+        color: #d1d1d1;
+    }}
+    
+    .stMarkdown {{
+        color: #d1d1d1;
+    }}
+    
+    table {{
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }}
+    
+    table, th, td {{
+        border: 1px solid #d1d1d1;
+        text-align: left;
+    }}
+    
+    th {{
+        background-color: #9b4de1;
+        color: white;
+        padding: 10px;
+    }}
+    
+    td {{
+        background-color: #3c2a5e;
+        color: white;
+        padding: 8px;
+    }}
+    
+    .stSelectbox, .stSlider {{
+        background-color: #9b4de1;
+        color: white;
+        border-radius: 5px;
     }}
     </style>
     """,
@@ -77,16 +140,13 @@ elif st.session_state.page == "categoría_1":
 elif st.session_state.page == "categoría_2":
     # Manejar las subpáginas de la categoría "Opción 2"
     if st.session_state.subpage is None:
-
-        st.header("info")
-        st.header("Seleccione una subcategoría")   
+        st.header("Seleccione una subcategoría")
         # Mostrar botones para las subcategorías
-        if st.button("Grafico De contenido Explicito"):
+        if st.button("Gráfico de Contenido Explícito"):
             cambiar_subpagina("subcategoria_a")
-
-        if st.button("Distribucion de idioma de canciones"):
-            cambiar_subpagina("subcategoria_b")  
-        if st.button("Tendencia De lanzamiento de canciones"):
+        if st.button("Distribución de Idioma de Canciones"):
+            cambiar_subpagina("subcategoria_b")
+        if st.button("Tendencia de Lanzamiento de Canciones"):
             cambiar_subpagina("subcategoria_c")
         if st.button("Duración Promedio por Género"):
             cambiar_subpagina("subcategoria_d")
@@ -99,13 +159,13 @@ elif st.session_state.page == "categoría_2":
     # Manejo de subpáginas específicas
     else:
         if st.session_state.subpage == "subcategoria_a":
-            st.header("Subcategoría A")
+            st.header("Subcategoría A: Contenido Explícito")
             st.write("Aquí se mostrarán los datos de la Subcategoría A.")
             pf_filtrado_2 = pf.dropna(subset=['genre', 'explicit_content'])
             contenido_filtrado = pf
             opcion_contenido = st.selectbox('Selecciona el tipo de contenido:', 
-                                ['Todos', 'contenido explicito', 'Sin Contenido Explícito'])
-            if opcion_contenido == 'contenido explicito':
+                                ['Todos', 'Contenido Explícito', 'Sin Contenido Explícito'])
+            if opcion_contenido == 'Contenido Explícito':
                 data_filtrada = pf[pf['explicit_content'] == 'Yes']
             elif opcion_contenido == 'Sin Contenido Explícito':
                 data_filtrada = pf[pf['explicit_content'] == 'No']
@@ -114,18 +174,17 @@ elif st.session_state.page == "categoría_2":
             contenido_explicito = data_filtrada.groupby(['genre', 'explicit_content']).size().unstack(fill_value=0)
 
             fig, ax = plt.subplots(figsize=(12, 8))
-            contenido_explicito.plot(kind='bar', stacked=True, ax=ax,)
+            contenido_explicito.plot(kind='bar', stacked=True, ax=ax)
             ax.set_title('Proporción de Canciones con Contenido Explícito por Género')
             ax.set_xlabel('Género')
             ax.set_ylabel('Número de Canciones')
-            #ax.legend(title='Contenido Explícito', labels=['No', 'Sí'])
             ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
             plt.tight_layout()
 
             st.pyplot(fig)
             
         elif st.session_state.subpage == "subcategoria_b":
-            st.header("Subcategoría B")
+            st.header("Subcategoría B: Distribución de Idioma")
             st.write("Aquí se mostrarán los datos de la Subcategoría B.")
             contador_lenguaje = pf["language"].value_counts()
             fig, ax = plt.subplots(figsize=(10, 8))
@@ -134,30 +193,22 @@ elif st.session_state.page == "categoría_2":
             st.pyplot(fig)
         
         elif st.session_state.subpage == "subcategoria_c":
-            st.header("Subcategoría C")
+            st.header("Subcategoría C: Tendencia de Lanzamiento de Canciones")
             st.write("Aquí se mostrarán los datos de la Subcategoría C.")
-            
-           
             pf['release_date'] = pd.to_datetime(pf['release_date'], errors='coerce')
             pf_filtrado = pf.dropna(subset=['release_date'])
             pf_filtrado['year'] = pf_filtrado['release_date'].dt.year
 
-            
             generos = pf_filtrado['genre'].dropna().unique()
             genero_seleccionado = st.selectbox('Selecciona un género musical:', options=generos)
-
-            
             pf_filtrado_genero = pf_filtrado[pf_filtrado['genre'] == genero_seleccionado]
 
-            
             min_year = int(pf_filtrado_genero['year'].min())
             max_year = int(pf_filtrado_genero['year'].max())
             rango_años = st.slider('Selecciona el rango de años:', min_year, max_year, (min_year, max_year))
 
-           
             pf_filtrado_rango = pf_filtrado_genero[(pf_filtrado_genero['year'] >= rango_años[0]) & (pf_filtrado_genero['year'] <= rango_años[1])]
 
-            
             releases_by_year = pf_filtrado_rango.groupby('year').size()
             
             fig, ax = plt.subplots(figsize=(10, 6))
@@ -173,7 +224,6 @@ elif st.session_state.page == "categoría_2":
             genero_filtrado = pf[['genre', 'duration']]
             genero_filtrado = genero_filtrado.dropna(subset=['genre', 'duration'])
             
-
             st.title("Duración de Canciones por Género")
             genero_unico = genero_filtrado['genre'].unique()
             seleccionar_genero = st.selectbox("Selecciona un género de música:", options=['Todos'] + list(genero_unico))
@@ -197,8 +247,7 @@ elif st.session_state.page == "categoría_2":
                 ax.set_ylabel('Canción')
             plt.tight_layout()
             st.pyplot(fig)
-        elif st.session_state.subpage == "subcategoria_e":
-            st.write("hola")
+
         if st.button("Volver atrás"):
             cambiar_pagina("inicio")
 
@@ -208,6 +257,7 @@ elif st.session_state.page == "categoría_3":
     
     if st.button("Volver atrás"):
         cambiar_pagina("inicio")
+
 
 
 
